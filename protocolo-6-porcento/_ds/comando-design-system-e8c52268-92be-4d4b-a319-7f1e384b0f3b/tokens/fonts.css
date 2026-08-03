@@ -1,0 +1,10 @@
+/* COMANDO — Webfonts
+ * SUBSTITUTION NOTE: The COMANDO wordmark uses a heavy condensed italic display face.
+ * No brand font files were provided, so these are the closest Google Fonts matches:
+ *   - Saira Condensed (900/800/700) → headline / command display (synthetic italic gives the wordmark slant)
+ *   - Saira (400–700) → body, UI, captions
+ *   - Saira Semi Condensed (600/700) → eyebrows, labels, tactical micro-type
+ * Fonts are served from Google's CDN via @import (their @font-face rules ship to consumers).
+ * Replace with licensed brand binaries when available.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&family=Saira+Condensed:wght@600;700;800;900&family=Saira+Semi+Condensed:wght@500;600;700&display=swap');

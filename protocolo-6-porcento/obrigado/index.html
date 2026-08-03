@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Falta 1 passo · Protocolo 6%</title>
+  <link rel="stylesheet" href="../_ds/comando-design-system-e8c52268-92be-4d4b-a319-7f1e384b0f3b/tokens/fonts.css">
+  <link rel="stylesheet" href="../_ds/comando-design-system-e8c52268-92be-4d4b-a319-7f1e384b0f3b/tokens/colors.css">
+  <link rel="stylesheet" href="../_ds/comando-design-system-e8c52268-92be-4d4b-a319-7f1e384b0f3b/tokens/typography.css">
+  <link rel="stylesheet" href="../_ds/comando-design-system-e8c52268-92be-4d4b-a319-7f1e384b0f3b/tokens/spacing.css">
+  <link rel="stylesheet" href="../_ds/comando-design-system-e8c52268-92be-4d4b-a319-7f1e384b0f3b/tokens/effects.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+  <link rel="stylesheet" href="obrigado.css">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WSTL4F8');</script>
+  <!-- End Google Tag Manager -->
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSTL4F8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <div class="ty-flowbar"></div>
+  <div class="ty-bg"></div>
+
+  <main class="ty">
+    <img class="ty__logo" src="../assets/logo-protocolo6.png" alt="Protocolo 6%">
+
+    <h1 class="ty__title">
+      Falta apenas <span class="ty__accent">1 passo</span> para você garantir seu lugar na imersão que vai quebrar o
+      ciclo que te trava há anos.
+    </h1>
+
+    <div class="ty__progress">
+      <div class="ty__progress-head">
+        <span class="ty__progress-label">Sua inscrição</span>
+        <span class="ty__progress-value">90%</span>
+      </div>
+      <div class="ty__progress-track">
+        <div class="ty__progress-fill"></div>
+      </div>
+    </div>
+
+    <p class="ty__copy">
+      Clique no botão abaixo e entre agora no <strong>Grupo Oficial do WhatsApp</strong> para receber os avisos,
+      materiais exclusivos e o link de acesso à imersão.
+    </p>
+
+    <p class="ty__alert">
+      <i class="ph-bold ph-warning"></i>
+      <span><strong>Atenção:</strong> é ao vivo e sem replay — todos os avisos e o link chegam pelo grupo.</span>
+    </p>
+
+    <a class="ty__btn" href="https://links.igtcoaching.com.br/protocolo-6porcento-grupos-wpp">
+      Entrar no grupo agora
+      <span class="ty__btn-arrow" aria-hidden="true">→</span>
+    </a>
+
+    <p class="ty__redirect">Você será redirecionado automaticamente em <strong id="ty-count">5</strong>s…</p>
+  </main>
+
+  <script>
+    (function () {
+      var GROUP_URL = 'https://links.igtcoaching.com.br/protocolo-6porcento-grupos-wpp';
+      var el = document.getElementById('ty-count');
+      var left = 5;
+      var timer = setInterval(function () {
+        left -= 1;
+        if (el) el.textContent = String(Math.max(0, left));
+        if (left <= 0) clearInterval(timer);
+      }, 1000);
+      setTimeout(function () { window.location.href = GROUP_URL; }, 5000);
+    })();
+  </script>
+</body>
+
+</html>
