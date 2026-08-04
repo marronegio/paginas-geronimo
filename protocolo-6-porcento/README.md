@@ -453,9 +453,10 @@ function withForwardedParams(baseUrl) {
     });
 
     // VK Metrics: identifica a venda com o anúncio Meta que originou o clique.
-    var adId     = incoming.get('utm_content') || '';
-    var vkSource = incoming.get('vk_source')   || 'paid_metaads';
-    target.searchParams.set('xcod', JSON.stringify({ vid: adId, vsrc: vkSource, url: 'checkout', v: 1 }));
+    var adId     = incoming.get('vk_ad_id') || '';
+    var vkSource = incoming.get('vk_source') || 'paid_metaads';
+    var pageUrl  = (window.location.origin + window.location.pathname).replace(/^https?:\/\//, '');
+    target.searchParams.set('xcod', JSON.stringify({ vid: adId, vsrc: vkSource, url: pageUrl, v: 1 }));
 
     return target.toString();
   } catch (e) {
@@ -472,6 +473,7 @@ function withForwardedParams(baseUrl) {
 | `if (!target.searchParams.has(key))` | O link de checkout já traz `off`, `split`, `sck` — a URL da LP nunca sobrescreve |
 | `try/catch` com `return baseUrl` | URL malformada não pode impedir a compra |
 | `xcod` com `set()` (não `append`) | É gerado pela LP, sempre um só |
+| `xcod.url` = `origin + pathname` sem protocolo | Mesmo formato que o `sales_pixel.js` da VK gera internamente — mantém os dois consistentes |
 
 ### 6.2 UTMs no payload do webhook
 
@@ -497,7 +499,8 @@ var payload = {
 | Parâmetro | Origem | Uso |
 |---|---|---|
 | `utm_source`, `utm_medium`, `utm_campaign`, `utm_term` | Anúncio | Webhook + URL do checkout |
-| `utm_content` | Anúncio — **deve conter o ID do anúncio Meta** | Vira `xcod.vid` (atribuição VK) + webhook |
+| `vk_ad_id` | Anúncio — **deve conter o ID do anúncio Meta** (`{{ad.id}}`) | Vira `xcod.vid` (atribuição VK). **Não** vai no webhook |
+| `utm_content` | Anúncio | Webhook + URL do checkout |
 | `vk_source` | Anúncio (opcional) | Vira `xcod.vsrc`; default `paid_metaads` |
 | `sck` | Fixo na URL de cada lote/oferta | Identifica lote e origem na Hotmart |
 
@@ -665,9 +668,9 @@ A LP é quem constrói o `xcod` e anexa na URL do checkout ([§6.1](#61-repasse-
 
 ```js
 target.searchParams.set('xcod', JSON.stringify({
-  vid:  incoming.get('utm_content') || '',              // ID do anúncio Meta
-  vsrc: incoming.get('vk_source')   || 'paid_metaads',  // origem
-  url:  'checkout',
+  vid:  incoming.get('vk_ad_id') || '',                 // ID do anúncio Meta
+  vsrc: incoming.get('vk_source') || 'paid_metaads',    // origem
+  url:  pageUrl,                                        // origin + pathname, sem protocolo
   v:    1
 }));
 ```
@@ -675,10 +678,12 @@ target.searchParams.set('xcod', JSON.stringify({
 Resultado (antes do encode):
 
 ```
-https://pay.hotmart.com/{PRODUTO}?off={OFERTA}&…&xcod={"vid":"1234567890","vsrc":"paid_metaads","url":"checkout","v":1}
+https://pay.hotmart.com/{PRODUTO}?off={OFERTA}&…&xcod={"vid":"1234567890","vsrc":"paid_metaads","url":"lp.igtcoaching.com.br/","v":1}
 ```
 
-**Contrato com o time de tráfego, válido para toda ação:** o `utm_content` do anúncio **precisa** carregar o ID do anúncio Meta. É dele que sai o `vid`. Se vier vazio, a venda não é atribuída ao criativo.
+**Contrato com o time de tráfego, válido para toda ação:** a URL do anúncio **precisa** levar `vk_ad_id={{ad.id}}`. É dele que sai o `vid`. Se vier vazio, a venda não é atribuída ao criativo.
+
+> **Atenção ao migrar uma ação antiga:** até `2026-08-04` o `vid` era lido de `utm_content`. Anúncio configurado com `utm_content={{ad.id}}` e sem `vk_ad_id` **não** atribui mais — o `vid` sai vazio. São parâmetros distintos, um ou outro, nunca os dois.
 
 > Histórico da LP de referência: esse valor já esteve em outro parâmetro e foi movido para dentro do `xcod` (commits `612810d`, `f1dbf1b`). Se a atribuição sumir em alguma ação, verifique primeiro se o `data-no-xcod-url` continua no lugar.
 
@@ -820,8 +825,9 @@ Regras dos lotes: datas ISO com `-03:00`; `sck` distinto por lote (é como o lot
 - [ ] GTM `GTM-WSTL4F8`: bloco `<head>` **e** `<noscript>`, em todas as páginas do funil
 - [ ] VK: pixel de leads + pixel de vendas no fim do `<body>`
 - [ ] `data-no-xcod-url` presente no `sales_pixel.js`
-- [ ] Abrir a LP com `?utm_source=x&utm_content=123&utm_campaign=y` e confirmar no checkout: UTMs presentes **e** `xcod` com `vid=123`
-- [ ] Time de tráfego confirmou que o `utm_content` dos anúncios leva o ID do criativo
+- [ ] Abrir a LP com `?utm_source=x&utm_campaign=y&vk_ad_id=123` e confirmar no checkout: UTMs presentes **e** `xcod` com `vid=123`
+- [ ] Time de tráfego confirmou que os anúncios levam `vk_ad_id={{ad.id}}` (não `utm_content`)
+- [ ] Venda de teste ponta a ponta: confirmar no painel da VK que a venda aparece atribuída ao criativo
 
 **Webhooks**
 - [ ] Submit de teste chega no n8n IGT

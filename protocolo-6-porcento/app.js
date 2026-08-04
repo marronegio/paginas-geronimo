@@ -60,9 +60,10 @@
         if (!target.searchParams.has(key)) target.searchParams.append(key, value);
       });
       // VK Metrics: identifica a venda com o anuncio Meta que originou o clique.
-      var adId = incoming.get('utm_content') || '';
+      var adId = incoming.get('vk_ad_id') || '';
       var vkSource = incoming.get('vk_source') || 'paid_metaads';
-      target.searchParams.set('xcod', JSON.stringify({ vid: adId, vsrc: vkSource, url: 'checkout', v: 1 }));
+      var pageUrl = (window.location.origin + window.location.pathname).replace(/^https?:\/\//, '');
+      target.searchParams.set('xcod', JSON.stringify({ vid: adId, vsrc: vkSource, url: pageUrl, v: 1 }));
       return target.toString();
     } catch (e) {
       return baseUrl;
