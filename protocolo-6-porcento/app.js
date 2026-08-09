@@ -11,6 +11,11 @@
     { url: 'https://functions-api.clint.digital/endpoints/integration/webhook/cbaced4a-d1c0-44cf-a55e-be395352c953', mode: 'no-cors', ct: 'text/plain;charset=UTF-8' }
   ];
 
+  // Viradas de lote suspensas pelo time em 09/08/2026, ate segunda ordem.
+  // A pagina fica travada no lote abaixo, ignorando as datas de start/end.
+  // Para retomar as viradas automaticas por data: LOTE_FIXO = null.
+  var LOTE_FIXO = 1;
+
   var LOTES = [
     { num: 1, price: 32, start: '2026-07-02T00:00:00-03:00', end: '2026-08-09T23:59:59-03:00', url: 'https://pay.hotmart.com/X106563861U?off=g9tanbl4&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote1-org' },
     { num: 2, price: 37, start: '2026-08-10T00:00:00-03:00', end: '2026-08-16T23:59:59-03:00', url: 'https://pay.hotmart.com/X106563861U?off=qwgs2eny&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote2-org' },
@@ -37,6 +42,11 @@
   function pad(n) { return String(n).padStart(2, '0'); }
 
   function currentLote(now) {
+    if (LOTE_FIXO !== null) {
+      for (var f = 0; f < LOTES.length; f++) {
+        if (LOTES[f].num === LOTE_FIXO) return LOTES[f];
+      }
+    }
     var t = now.getTime();
     for (var i = 0; i < LOTES.length; i++) {
       if (t >= new Date(LOTES[i].start).getTime() && t <= new Date(LOTES[i].end).getTime()) return LOTES[i];

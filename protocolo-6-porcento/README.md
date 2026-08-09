@@ -778,6 +778,8 @@ var VAGAS_PCT  = 35;                             // % da barra de progresso
 
 var WEBHOOKS = [ /* UUIDs da ação — n8n e Clint */ ];
 
+var LOTE_FIXO = 1;                               // trava a página num lote; null = viradas por data
+
 var LOTES = [
   { num: 1, price: 32,
     start: '2026-07-02T00:00:00-03:00',
@@ -788,6 +790,8 @@ var LOTES = [
 ```
 
 Regras dos lotes: datas ISO com `-03:00`; `sck` distinto por lote (é como o lote aparece no relatório da Hotmart); a virada é automática pelo relógio do visitante e reflete em todo `[data-lote="num"]` / `[data-lote="price"]` da página.
+
+> **Viradas suspensas desde 09/08/2026 (decisão do time, até segunda ordem).** `LOTE_FIXO = 1` trava número, preço e URL de checkout no Lote 1 (R$32) e faz `currentLote()` ignorar `start`/`end`. Para retomar as viradas por data, defina `LOTE_FIXO = null` — as datas dos lotes seguintes continuam no passado, então a página saltaria direto para o lote correspondente à data de retomada; reveja o cronograma antes de religar.
 
 **No HTML:** copy, `<title>`, `<meta description>`, assets do hero e logos, textos do modal, links da `/obrigado/`.
 
