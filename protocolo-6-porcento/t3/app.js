@@ -136,6 +136,7 @@
       email: $('#in-email').value,
       whatsapp: country.dial + ' ' + whatsappRaw,
       telefone: country.dial + whatsappRaw.replace(/\D/g, ''),
+      pagina: (function () { var el = $('#in-pagina'); return el ? el.value : ''; })(),
       utm_campaign: params.get('utm_campaign') || '',
       utm_medium: params.get('utm_medium') || '',
       utm_source: params.get('utm_source') || '',
