@@ -364,11 +364,12 @@ html, body { margin: 0; padding: 0; background: #FFFFFF; }
   letter-spacing: .22em;
   text-transform: uppercase;
   text-align: center;
-  padding: 9px 16px;
+  padding: 10px 16px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 5px;
   position: relative;
   z-index: 60;
 }
@@ -379,6 +380,40 @@ html, body { margin: 0; padding: 0; background: #FFFFFF; }
   border-radius: 50%;
   background: #fff;
   animation: p6-pulse 1.6s ease-in-out infinite;
+}
+/* contagem do lote — vive dentro da tarja, nao em faixa propria */
+.p6-tarja__lote {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  letter-spacing: .14em;
+}
+.p6-tarja__lote-clock {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  letter-spacing: .06em;
+  font-variant-numeric: tabular-nums;
+}
+.p6-tarja__lote-unit {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+}
+.p6-tarja__evento {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 10px;
+}
+.p6-tarja__lote-label { white-space: nowrap; }
+.p6-tarja__lote-num { font-weight: 800; }
+.p6-tarja__lote-sep { opacity: .5; }
+@media (max-width: 680px) {
+  .p6-tarja { letter-spacing: .12em; gap: 4px; padding: 9px 12px; }
+  .p6-tarja__lote { font-size: 13px; gap: 7px; }
+  .p6-tarja__evento { gap: 10px; font-size: 9px; }
 }
 
 /* ---------- nav ---------- */

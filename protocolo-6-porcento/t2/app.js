@@ -11,17 +11,14 @@
     { url: 'https://functions-api.clint.digital/endpoints/integration/webhook/cbaced4a-d1c0-44cf-a55e-be395352c953', mode: 'no-cors', ct: 'text/plain;charset=UTF-8' }
   ];
 
-  // Viradas de lote suspensas pelo time em 09/08/2026, ate segunda ordem.
-  // A pagina fica travada no lote abaixo, ignorando as datas de start/end.
-  // Para retomar as viradas automaticas por data: LOTE_FIXO = null.
-  var LOTE_FIXO = 1;
+  // Viradas automaticas por data retomadas em 18/08/2026.
+  // Para travar a pagina em um lote especifico: LOTE_FIXO = <numero do lote>.
+  var LOTE_FIXO = null;
 
   var LOTES = [
-    { num: 1, price: 32, start: '2026-07-02T00:00:00-03:00', end: '2026-08-09T23:59:59-03:00', url: 'https://pay.hotmart.com/X106563861U?off=g9tanbl4&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote1-org' },
-    { num: 2, price: 37, start: '2026-08-10T00:00:00-03:00', end: '2026-08-16T23:59:59-03:00', url: 'https://pay.hotmart.com/X106563861U?off=qwgs2eny&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote2-org' },
-    { num: 3, price: 42, start: '2026-08-17T00:00:00-03:00', end: '2026-08-23T23:59:59-03:00', url: 'https://pay.hotmart.com/X106563861U?off=9sb3xkmn&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote3-org' },
-    { num: 4, price: 47, start: '2026-08-24T00:00:00-03:00', end: '2026-08-26T23:59:59-03:00', url: 'https://pay.hotmart.com/X106563861U?off=fomlkvyv&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote4-org' },
-    { num: 5, price: 52, start: '2026-08-27T00:00:00-03:00', end: '2026-08-28T23:59:59-03:00', url: 'https://pay.hotmart.com/X106563861U?off=jjz7hp76&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote5-org' }
+    { num: 1, price: 32, start: '2026-07-02T00:00:00-03:00', end: '2026-08-18T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=g9tanbl4&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote1-org' },
+    { num: 2, price: 37, start: '2026-08-19T00:00:00-03:00', end: '2026-08-25T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=qwgs2eny&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote2-org' },
+    { num: 3, price: 42, start: '2026-08-26T00:00:00-03:00', end: '2026-08-28T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=9sb3xkmn&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote3-org' }
   ];
 
   var COUNTRIES = [
@@ -85,9 +82,23 @@
 
   var state = { country: 'BR', loteUrl: LOTES[0].url };
 
+  function updateLoteBar(l) {
+    var bar = $('#lote-bar');
+    if (!bar) return;
+    var left = new Date(l.end).getTime() - Date.now();
+    // Lote fixo/encerrado nao tem contagem util: esconde a faixa em vez de zerar.
+    if (left <= 0) { bar.hidden = true; return; }
+    bar.hidden = false;
+    $('#lb-days').textContent = pad(Math.floor(left / 86400000));
+    $('#lb-hours').textContent = pad(Math.floor(left % 86400000 / 3600000));
+    $('#lb-mins').textContent = pad(Math.floor(left % 3600000 / 60000));
+    $('#lb-secs').textContent = pad(Math.floor(left % 60000 / 1000));
+  }
+
   function applyLote() {
     var l = currentLote(new Date());
     state.loteUrl = l.url;
+    updateLoteBar(l);
     $all('[data-lote="num"]').forEach(function (e) { e.textContent = l.num; });
     $all('[data-lote="price"]').forEach(function (e) { e.textContent = l.price; });
     var lbl = $('#lote-progress-label');

@@ -607,11 +607,12 @@
       letter-spacing: .22em;
       text-transform: uppercase;
       text-align: center;
-      padding: 9px 16px;
+      padding: 10px 16px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 14px;
+      gap: 5px;
       position: relative;
       z-index: 60
     }
@@ -623,6 +624,65 @@
       border-radius: 50%;
       background: #fff;
       animation: 1.6s ease-in-out infinite p6-pulse
+    }
+
+    .p6-tarja__lote {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      letter-spacing: .14em
+    }
+
+    .p6-tarja__lote-clock {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 2px;
+      letter-spacing: .06em;
+      font-variant-numeric: tabular-nums
+    }
+
+    .p6-tarja__lote-unit {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 1px
+    }
+
+    .p6-tarja__evento {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 10px
+    }
+
+    .p6-tarja__lote-label {
+      white-space: nowrap
+    }
+
+    .p6-tarja__lote-num {
+      font-weight: 800
+    }
+
+    .p6-tarja__lote-sep {
+      opacity: .5
+    }
+
+    @media (max-width:680px) {
+      .p6-tarja {
+        letter-spacing: .12em;
+        gap: 4px;
+        padding: 9px 12px
+      }
+
+      .p6-tarja__lote {
+        font-size: 13px;
+        gap: 7px
+      }
+
+      .p6-tarja__evento {
+        gap: 10px;
+        font-size: 9px
+      }
     }
 
     .p6-nav {
@@ -1561,8 +1621,8 @@
 
     <!-- ===== TOP TARJA ===== -->
     <div class="p6-tarja">
-      <span class="p6-tarja__dot"></span>
-      Online e ao vivo · 29 de agosto · Sem replay
+      <span class="p6-tarja__lote" id="lote-bar" hidden><span class="p6-tarja__lote-label">Lote <span data-lote="num">1</span> termina em</span><span class="p6-tarja__lote-clock"><span class="p6-tarja__lote-unit"><span class="p6-tarja__lote-num" id="lb-days">00</span>d</span><span class="p6-tarja__lote-sep">:</span><span class="p6-tarja__lote-unit"><span class="p6-tarja__lote-num" id="lb-hours">00</span>h</span><span class="p6-tarja__lote-sep">:</span><span class="p6-tarja__lote-unit"><span class="p6-tarja__lote-num" id="lb-mins">00</span>m</span><span class="p6-tarja__lote-sep">:</span><span class="p6-tarja__lote-unit"><span class="p6-tarja__lote-num" id="lb-secs">00</span>s</span></span></span>
+      <span class="p6-tarja__evento"><span class="p6-tarja__dot"></span>Online e ao vivo · 29 de agosto · Sem replay</span>
     </div>
 
     <!-- ===== NAV ===== -->
@@ -1885,7 +1945,7 @@
 
   </div>
 
-  <script src="app.js?v=5" defer></script>
+  <script src="app.js?v=6" defer></script>
 
   <!--Script de Leads-->
   <script async="true">
