@@ -15,6 +15,9 @@
   // Para travar a pagina em um lote especifico: LOTE_FIXO = <numero do lote>.
   var LOTE_FIXO = null;
 
+  // Janela em que a contagem do lote fica visivel na tarja: as 24h finais do lote.
+  var LOTE_BAR_WINDOW_MS = 86400000;
+
   var LOTES = [
     { num: 1, price: 32, start: '2026-07-02T00:00:00-03:00', end: '2026-08-18T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=g9tanbl4&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote1-org' },
     { num: 2, price: 37, start: '2026-08-19T00:00:00-03:00', end: '2026-08-25T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=qwgs2eny&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote2-org' },
@@ -86,10 +89,16 @@
     var bar = $('#lote-bar');
     if (!bar) return;
     var left = new Date(l.end).getTime() - Date.now();
-    // Lote fixo/encerrado nao tem contagem util: esconde a faixa em vez de zerar.
-    if (left <= 0) { bar.hidden = true; return; }
+    // So aparece no dia da virada (24h finais). Lote fixo/encerrado tambem fica escondido.
+    if (left <= 0 || left > LOTE_BAR_WINDOW_MS) { bar.hidden = true; return; }
     bar.hidden = false;
-    $('#lb-days').textContent = pad(Math.floor(left / 86400000));
+    var days = Math.floor(left / 86400000);
+    // Dentro da janela de 24h os dias sao sempre 00: some com a unidade em vez de zerar.
+    var daysUnit = $('#lb-days-unit');
+    var daysSep = $('#lb-days-sep');
+    if (daysUnit) daysUnit.hidden = days === 0;
+    if (daysSep) daysSep.hidden = days === 0;
+    $('#lb-days').textContent = pad(days);
     $('#lb-hours').textContent = pad(Math.floor(left % 86400000 / 3600000));
     $('#lb-mins').textContent = pad(Math.floor(left % 3600000 / 60000));
     $('#lb-secs').textContent = pad(Math.floor(left % 60000 / 1000));
