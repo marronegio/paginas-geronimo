@@ -15,7 +15,7 @@
   ];
 
   // TODO(acao): trocar pelo link real do produto/oferta na Hotmart (com sck da origem).
-  var CHECKOUT_URL = 'https://links.geronimo.com.br/oportunidade-cnc-p6p';
+  var CHECKOUT_URL = 'https://pay.hotmart.com/C97417827Q?off=paio32a6&split=12&checkoutMode=10&hidewallet=1&sck=oportunidade-cnc-p6p';
 
   var COUNTRIES = [
     { code: 'BR', dial: '+55', flag: '🇧🇷' }, { code: 'US', dial: '+1', flag: '🇺🇸' }, { code: 'CA', dial: '+1', flag: '🇨🇦' },
