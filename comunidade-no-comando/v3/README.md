@@ -231,7 +231,7 @@ começado e abandonado tudo o que tentou até hoje."*
 
 A página no ar usa a headline principal. Para rodar variante, duplique a pasta (padrão `t1/`…`t4/`
 do repositório de referência), troque `.cnc-hero__title` / `.cnc-hero__sub` e o
-`<input id="in-pagina">` — hoje `cnc-v1` — para o identificador da variante.
+`<input id="in-pagina">` — nesta pasta `cnc-v3` — para o identificador da variante.
 
 ---
 
