@@ -773,7 +773,7 @@ Tudo o mais é igual. Se algo fora desta lista precisou mudar, provavelmente val
 **Em `app.js`** — [app.js:4-20](app.js#L4-L20):
 
 ```js
-var EVENT_DATE = '2026-08-29T09:00:00-03:00';   // data/hora do evento, SEMPRE com -03:00
+var EVENT_DATE = '2026-10-17T09:00:00-03:00';   // data/hora do evento, SEMPRE com -03:00
 var VAGAS_PCT  = 35;                             // % da barra de progresso
 
 var WEBHOOKS = [ /* UUIDs da ação — n8n e Clint */ ];
@@ -791,7 +791,7 @@ var LOTES = [
 
 Regras dos lotes: datas ISO com `-03:00`; `sck` distinto por lote (é como o lote aparece no relatório da Hotmart); a virada é automática pelo relógio do visitante e reflete em todo `[data-lote="num"]` / `[data-lote="price"]` da página.
 
-> **Viradas suspensas desde 09/08/2026 (decisão do time, até segunda ordem).** `LOTE_FIXO = 1` trava número, preço e URL de checkout no Lote 1 (R$32) e faz `currentLote()` ignorar `start`/`end`. Para retomar as viradas por data, defina `LOTE_FIXO = null` — as datas dos lotes seguintes continuam no passado, então a página saltaria direto para o lote correspondente à data de retomada; reveja o cronograma antes de religar.
+> **Edição de 17/10/2026 — página travada no Lote 1 (desde 29/08/2026).** `LOTE_FIXO = 1` trava número, preço e URL de checkout no Lote 1 (R$32) e faz `currentLote()` ignorar `start`/`end`. Só o Lote 1 foi migrado para a edição de outubro (produto `T107350876K`, oferta `ic977dei`, `sck=…-out26-lote1-org`); **`LOTES[2]` e `LOTES[3]` ainda carregam as datas de agosto e as URLs da edição anterior.** Antes de definir `LOTE_FIXO = null`, reescreva as janelas dos lotes 2 e 3 para o cronograma de outubro e troque as URLs — do contrário a virada manda o comprador para uma oferta encerrada.
 
 **No HTML:** copy, `<title>`, `<meta description>`, assets do hero e logos, textos do modal, links da `/obrigado/`.
 

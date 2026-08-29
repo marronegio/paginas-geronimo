@@ -11,7 +11,7 @@
     // IGT (n8n): devolve headers CORS, aceita application/json.
     { url: 'https://webhook.igtcoaching.com.br/webhook/e9a439c7-9764-4c99-be1e-f472d0b4c998', mode: 'cors', ct: 'application/json' },
     // Clint (CRM): sem CORS no preflight -> enviar como "simple request" (text/plain + no-cors).
-    { url: 'https://functions-api.clint.digital/endpoints/integration/webhook/87bf5aa8-71de-405d-bcc0-6e3f40af8e91', mode: 'no-cors', ct: 'text/plain;charset=UTF-8' }
+    { url: 'https://functions-api.clint.digital/endpoints/integration/webhook/bc122b46-ad8a-4800-a34e-e2c899c5bbc8', mode: 'no-cors', ct: 'text/plain;charset=UTF-8' }
   ];
 
   // TODO(acao): trocar pelo link real do produto/oferta na Hotmart (com sck da origem).

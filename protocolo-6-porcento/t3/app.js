@@ -1,25 +1,25 @@
 (function () {
   'use strict';
 
-  var EVENT_DATE = '2026-08-29T09:00:00-03:00';
+  var EVENT_DATE = '2026-10-17T09:00:00-03:00';
   var VAGAS_PCT = 35;
 
   var WEBHOOKS = [
     // IGT: devolve headers CORS, aceita application/json.
     { url: 'https://webhook.igtcoaching.com.br/webhook/72fdafc9-eaef-48ca-935a-b2009fa0d996', mode: 'cors', ct: 'application/json' },
     // Clint: sem CORS no preflight -> enviar como "simple request" (text/plain + no-cors).
-    { url: 'https://functions-api.clint.digital/endpoints/integration/webhook/cbaced4a-d1c0-44cf-a55e-be395352c953', mode: 'no-cors', ct: 'text/plain;charset=UTF-8' }
+    { url: 'https://functions-api.clint.digital/endpoints/integration/webhook/87bf5aa8-71de-405d-bcc0-6e3f40af8e91', mode: 'no-cors', ct: 'text/plain;charset=UTF-8' }
   ];
 
-  // Viradas automaticas por data retomadas em 18/08/2026.
+  // Edicao de 17/10/2026: pagina travada no Lote 1 ate o cronograma de outubro ser definido.
   // Para travar a pagina em um lote especifico: LOTE_FIXO = <numero do lote>.
-  var LOTE_FIXO = null;
+  var LOTE_FIXO = 1;
 
   // Janela em que a contagem do lote fica visivel na tarja: as 24h finais do lote.
   var LOTE_BAR_WINDOW_MS = 86400000;
 
   var LOTES = [
-    { num: 1, price: 32, start: '2026-07-02T00:00:00-03:00', end: '2026-08-18T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=g9tanbl4&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote1-org' },
+    { num: 1, price: 32, start: '2026-07-02T00:00:00-03:00', end: '2026-08-18T23:59:59.999-03:00', url: 'https://pay.hotmart.com/T107350876K?off=ic977dei&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-out26-lote1-org' },
     { num: 2, price: 37, start: '2026-08-19T00:00:00-03:00', end: '2026-08-25T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=qwgs2eny&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote2-org' },
     { num: 3, price: 42, start: '2026-08-26T00:00:00-03:00', end: '2026-08-28T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=9sb3xkmn&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote3-org' }
   ];
