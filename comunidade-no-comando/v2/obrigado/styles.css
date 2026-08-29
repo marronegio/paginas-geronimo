@@ -1,0 +1,411 @@
+/* Fallbacks com métricas ajustadas (Arial) — mesmo espaço da Saira => sem CLS ao trocar a fonte */
+@font-face{font-family:"Saira Fallback";src:local('Arial'),local('ArialMT');font-display:swap;ascent-override:109.5203%;descent-override:42.3607%;line-gap-override:0%;size-adjust:103.6337%}
+@font-face{font-family:"Saira Condensed Fallback";src:local('Arial'),local('ArialMT');font-display:swap;ascent-override:143.3382%;descent-override:55.4409%;line-gap-override:0%;size-adjust:79.1834%}
+@font-face{font-family:"Saira Semi Condensed Fallback";src:local('Arial'),local('ArialMT');font-display:swap;ascent-override:123.7124%;descent-override:47.85%;line-gap-override:0%;size-adjust:91.745%}
+/* Saira self-hosted (subset latin/latin-ext) — substitui o @import do Google */
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('../assets/fonts/Saira-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('../assets/fonts/Saira-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('../assets/fonts/Saira-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('../assets/fonts/Saira-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('../assets/fonts/Saira-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('../assets/fonts/Saira-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('../assets/fonts/Saira-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('../assets/fonts/Saira-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../assets/fonts/SairaCondensed-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../assets/fonts/SairaCondensed-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/SairaCondensed-700-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/SairaCondensed-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../assets/fonts/SairaCondensed-800-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../assets/fonts/SairaCondensed-800-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('../assets/fonts/SairaCondensed-900-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira Condensed';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('../assets/fonts/SairaCondensed-900-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira Semi Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/SairaSemiCondensed-500-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira Semi Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/SairaSemiCondensed-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira Semi Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../assets/fonts/SairaSemiCondensed-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira Semi Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../assets/fonts/SairaSemiCondensed-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Saira Semi Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/SairaSemiCondensed-700-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Saira Semi Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/SairaSemiCondensed-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Phosphor Bold (self-hosted) — apenas os icones usados nesta pagina */
+@font-face{font-family:"Phosphor-Bold";src:url("../assets/fonts/Phosphor-Bold.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+.ph-bold{font-family:"Phosphor-Bold"!important;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;display:inline-block;font-feature-settings:"liga";-webkit-font-smoothing:antialiased}
+.ph-bold.ph-check:before{content:"\e182"}
+.ph-bold.ph-envelope-simple:before{content:"\e218"}
+.ph-bold.ph-rocket-launch:before{content:"\e3fe"}
+.ph-bold.ph-sign-in:before{content:"\e428"}
+.ph-bold.ph-whatsapp-logo:before{content:"\e5d0"}
+
+/* ===== tokens (mesmos da LP) ===== */
+:root {
+  --font-display: 'Saira Condensed', 'Saira Condensed Fallback', 'Arial Narrow', sans-serif;
+  --font-body: 'Saira', 'Saira Fallback', system-ui, -apple-system, sans-serif;
+  --font-label: 'Saira Semi Condensed', 'Saira Semi Condensed Fallback', sans-serif;
+  --void: #08080A;
+  --coal: #0D0D11;
+  --slate: #131319;
+  --slate-2: #1A1A21;
+  --line: rgba(255,255,255,.09);
+  --line-strong: rgba(255,255,255,.16);
+  --red: #D8221E;
+  --red-hot: #F12026;
+  --red-deep: #A81512;
+  --text: #C4C4CE;
+  --muted: #85858F;
+}
+
+html, body { margin: 0; padding: 0; background: #08080A; }
+* { box-sizing: border-box; }
+figure, blockquote { margin: 0; }
+::selection { background: #F12026; color: #fff; }
+img { max-width: 100%; }
+
+@keyframes ty-flow { 0% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
+
+/* ---------- palco ---------- */
+.ty-root {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+.ty-flow { height: 3px; width: 100%; flex: none; background: linear-gradient(90deg,var(--red-hot),var(--red-deep),var(--red-hot)); background-size: 200% 100%; animation: ty-flow 6s linear infinite; }
+.ty-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(80% 55% at 50% 0%, rgba(241,32,38,.22) 0%, transparent 60%); }
+.ty-lines { position: absolute; inset: 0; pointer-events: none; opacity: .5; background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 96px); }
+
+.ty {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 4vw, 44px);
+  /* width:100% e obrigatorio: .ty-root e flex, e 'margin:0 auto' no eixo cruzado
+     cancela o stretch — sem isto a secao vira shrink-to-fit e o grid de passos
+     quebra em duas linhas. */
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 72px) 28px clamp(48px, 6vw, 80px);
+  text-align: center;
+}
+
+/* ---------- cabecalho ---------- */
+.ty__head { display: flex; flex-direction: column; align-items: center; }
+.ty__logo { height: clamp(44px, 6vw, 62px); width: auto; display: block; margin-bottom: clamp(24px, 3.5vw, 36px); }
+.ty__seal {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(241,32,38,.12);
+  border: 2px solid rgba(241,32,38,.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.ty__seal-icon { font-size: 30px; color: var(--red-hot); }
+.ty__eyebrow {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--red-hot);
+  margin: 0 0 14px;
+}
+.ty__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.1rem, 5vw, 3.8rem);
+  line-height: .98;
+  letter-spacing: -.005em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  max-width: 800px;
+  text-wrap: balance;
+}
+.ty__subtitle {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--red-hot);
+  margin: 16px 0 0;
+}
+
+/* ---------- passos ---------- */
+.ty__steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: ty-step;
+}
+.ty__step {
+  position: relative;
+  background: linear-gradient(180deg, var(--slate-2) 0%, var(--slate) 100%);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--red);
+  border-radius: 10px;
+  padding: 30px 24px 26px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ty__step-num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 3.4rem;
+  line-height: .8;
+  color: var(--red-hot);
+  letter-spacing: -.02em;
+  display: block;
+}
+.ty__step-text { margin: 0; font-size: 1.05rem; line-height: 1.5; color: #EDEDF2; }
+.ty__step-text strong { color: #fff; font-weight: 700; }
+.ty__step-icon { position: absolute; top: 26px; right: 22px; font-size: 20px; color: rgba(241,32,38,.45); }
+
+/* ---------- rodape ---------- */
+.ty__foot { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.ty__foot-label {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+.ty__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 17px 30px;
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: clamp(14px, 2.2vw, 16px);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  color: #fff;
+  background: var(--red);
+  border: 2px solid transparent;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,.35);
+  transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.ty__btn:hover { background: var(--red-hot); box-shadow: 0 0 0 1px rgba(241,32,38,.45), 0 10px 34px rgba(241,32,38,.38); }
+.ty__btn:active { transform: translateY(1px) scale(.99); }
+.ty__btn:focus-visible { outline: 3px solid rgba(241,32,38,.55); outline-offset: 3px; }
+.ty__btn-icon { font-size: 20px; flex: none; }
+.ty__mail { font-size: .92rem; color: var(--muted); margin: 0; }
+.ty__mail a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+.ty__mail a:hover { color: #fff; border-color: currentColor; }
+
+/* ---------- creditos ---------- */
+.ty-footer { position: relative; flex: none; border-top: 1px solid var(--line); background: #050506; padding: 22px 28px; text-align: center; }
+.ty-footer p { margin: 0; font-size: 12px; letter-spacing: .03em; color: var(--muted); }
+
+/* ===== desktop: a pagina cabe na tela ('vh' em vez de 'vw' na vertical) =====
+   Sem overflow:hidden de proposito — se a tela for muito baixa, rola normalmente
+   em vez de cortar o CTA. */
+@media (min-width: 900px) {
+  .ty { gap: clamp(20px, 3.2vh, 44px); padding: clamp(24px, 4vh, 60px) 28px clamp(28px, 4.4vh, 68px); }
+  .ty__logo { height: clamp(38px, 5.4vh, 62px); margin-bottom: clamp(16px, 2.6vh, 36px); }
+  .ty__seal { width: clamp(50px, 7vh, 64px); height: clamp(50px, 7vh, 64px); margin-bottom: clamp(12px, 1.8vh, 18px); }
+  .ty__seal-icon { font-size: clamp(24px, 3.4vh, 30px); }
+  .ty__eyebrow { margin-bottom: clamp(10px, 1.4vh, 14px); }
+  .ty__title { font-size: clamp(2rem, 4.4vh, 3.8rem); }
+  .ty__subtitle { font-size: clamp(1.3rem, 2.6vh, 2.2rem); margin-top: clamp(10px, 1.6vh, 16px); }
+  .ty__step { padding: clamp(20px, 3vh, 30px) 24px clamp(18px, 2.6vh, 26px); gap: clamp(10px, 1.6vh, 14px); }
+  .ty__step-num { font-size: clamp(2.4rem, 4.4vh, 3.4rem); }
+  .ty__step-icon { top: clamp(18px, 2.6vh, 26px); }
+  .ty__foot { gap: clamp(12px, 1.8vh, 16px); }
+}
+
+/* ===== mobile: muda COMPORTAMENTO, nao tamanho ===== */
+@media (max-width: 680px) {
+  .ty { justify-content: flex-start; gap: 30px; }
+  .ty__step { padding: 24px 20px 22px; }
+  .ty__step-num { font-size: 2.8rem; }
+  .ty__btn { width: 100%; font-size: 13px; letter-spacing: .07em; padding: 17px 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
