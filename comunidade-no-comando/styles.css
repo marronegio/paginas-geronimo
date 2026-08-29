@@ -622,26 +622,6 @@ img { max-width: 100%; }
 
 /* ---------- oferta ---------- */
 .cnc-offer { max-width: 1280px; margin: 0 auto; padding: clamp(64px,9vw,120px) 28px; scroll-margin-top: 76px; }
-.cnc-offer__alert {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  max-width: 760px;
-  margin: 0 auto 26px;
-  background: rgba(216,34,30,.12);
-  border: 1px solid rgba(241,32,38,.42);
-  border-radius: 6px;
-  padding: 12px 18px;
-  font-family: var(--font-label);
-  font-weight: 700;
-  font-size: clamp(12px,2vw,14px);
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: #FF6B6E;
-  text-align: center;
-}
-.cnc-offer__alert i { font-size: 18px; flex: none; }
 .cnc-offer__head { text-align: center; margin-bottom: clamp(32px,4.5vw,46px); }
 .cnc-offer__card {
   max-width: 760px;
@@ -699,13 +679,6 @@ img { max-width: 100%; }
 .cnc-offer__price-cents { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.4rem,3vw,2rem); color: #0A0A0B; margin-top: clamp(10px,2vw,18px); }
 .cnc-offer__price-note { font-size: .96rem; color: #55555E; margin: 12px 0 0; }
 .cnc-offer__price-note strong { color: #0A0A0B; }
-.cnc-offer__progress { max-width: 420px; margin: 22px auto 0; }
-.cnc-offer__progress-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 7px; }
-.cnc-offer__progress-label, .cnc-offer__progress-value { font-family: var(--font-label); font-weight: 700; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; }
-.cnc-offer__progress-label { color: #6A6A72; }
-.cnc-offer__progress-value { color: var(--red); }
-.cnc-offer__progress-track { height: 6px; background: rgba(0,0,0,.10); border-radius: 999px; overflow: hidden; }
-.cnc-offer__progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--red-hot), var(--red-deep)); border-radius: 999px; transition: width .8s cubic-bezier(.22,1,.36,1); }
 .cnc-offer__cta-wrap { margin-top: 26px; }
 .cnc-offer__fine { font-size: .82rem; line-height: 1.6; color: #6A6A72; margin: 18px auto 0; max-width: 540px; }
 .cnc-offer__fine strong { color: #2A2A30; }

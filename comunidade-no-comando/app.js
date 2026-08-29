@@ -17,9 +17,6 @@
   // TODO(acao): trocar pelo link real do produto/oferta na Hotmart (com sck da origem).
   var CHECKOUT_URL = 'https://links.geronimo.com.br/oportunidade-cnc-p6p';
 
-  var VAGAS_TOTAL = 500;   // "Atencao: apenas 500 vagas"
-  var VAGAS_PCT = 18;      // % da barra de progresso
-
   var COUNTRIES = [
     { code: 'BR', dial: '+55', flag: '🇧🇷' }, { code: 'US', dial: '+1', flag: '🇺🇸' }, { code: 'CA', dial: '+1', flag: '🇨🇦' },
     { code: 'PT', dial: '+351', flag: '🇵🇹' }, { code: 'AR', dial: '+54', flag: '🇦🇷' }, { code: 'CL', dial: '+56', flag: '🇨🇱' },
@@ -161,17 +158,6 @@
 
   // ----- init -----
   function init() {
-    // barra de vagas
-    var pct = Math.max(0, Math.min(100, VAGAS_PCT));
-    var fill = $('#vagas-fill');
-    if (fill) fill.style.width = pct + '%';
-    var track = $('#vagas-track');
-    if (track) track.setAttribute('aria-valuenow', String(pct));
-    $all('[data-vagas="restantes"]').forEach(function (e) {
-      e.textContent = String(Math.max(0, Math.round(VAGAS_TOTAL * (100 - pct) / 100)));
-    });
-    $all('[data-vagas="total"]').forEach(function (e) { e.textContent = String(VAGAS_TOTAL); });
-
     // seletor de DDI — Brasil sempre primeiro (e o default)
     var sel = $('#country-select');
     COUNTRIES.forEach(function (c) {

@@ -1,6 +1,6 @@
 # Comunidade No Comando — página de vendas
 
-LP de venda direta da CNC (programa de 12 meses, 12x de R$ 99,50, 500 vagas).
+LP de venda direta da CNC (programa de 12 meses, 12x de R$ 99,50).
 Segue o padrão descrito em [`../protocolo-6-porcento/README.md`](../protocolo-6-porcento/README.md) — HTML/CSS/JS vanilla, sem build e sem dependência externa em runtime.
 
 Prefixo de classe desta página: **`cnc-`**.
@@ -38,12 +38,6 @@ Tudo isto está marcado com `SUBSTITUIR-` no código e **precisa** ser trocado p
 | [`index.html`](index.html) link do WhatsApp | `https://wa.me/55DDDNUMERO` no bloco "Ainda com dúvidas?" | suporte |
 | [`obrigado/index.html`](obrigado/index.html) link do WhatsApp | mesmo número, no botão "Chame meu time no WhatsApp" | suporte |
 | Hotmart | URL de página de obrigado apontando para `/obrigado/` | responsável pelo produto |
-
-Ajustar também conforme a operação decidir:
-
-- `VAGAS_PCT` em [`app.js`](app.js) — % da barra de progresso (hoje `18`, ou seja, 410 de 500 restantes).
-  O número de restantes na página é calculado a partir dele; não existe texto de vaga hardcoded.
-- `VAGAS_TOTAL` — hoje `500`, conforme a copy.
 
 **Não muda** (constantes da empresa, já configuradas): GTM `GTM-WSTL4F8` · conta VK `cK0i3FbAiLmfmeAOoJlK` ·
 `withForwardedParams()` · `formatBrPhone()` · lista `COUNTRIES` · formato do payload dos webhooks · `.htaccess`.
