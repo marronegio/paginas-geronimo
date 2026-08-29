@@ -503,45 +503,42 @@ img { max-width: 100%; }
 .cnc-promise__text { margin: 0; font-size: 1rem; line-height: 1.5; color: var(--text); }
 
 /* ---------- provas ---------- */
-.cnc-proof__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
-.cnc-proof__card {
-  background: var(--slate);
+/* O carrossel sangra ate as bordas da viewport (o .cnc-root ja tem overflow-x:hidden),
+   entao as imagens entram e saem de tela em vez de morrer no padding da secao. */
+.cnc-proof__marquee {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+.cnc-proof__track {
+  display: flex;
+  width: max-content;
+  animation: cnc-proof-scroll 60s linear infinite;
+}
+.cnc-proof__marquee:hover .cnc-proof__track { animation-play-state: paused; }
+/* O espacamento vem de margin-right (e nao de gap) porque a duplicata so fecha o loop
+   sem salto se metade da faixa for exatamente igual a um conjunto + seu proprio vao. */
+.cnc-proof__slide { flex: none; margin-right: 18px; }
+.cnc-proof__slide img {
+  display: block;
+  height: clamp(250px, 26vw, 360px);
+  width: auto;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 26px 24px;
-  position: relative;
-  overflow: hidden;
-  transition: border-color .18s ease, transform .18s ease;
 }
-.cnc-proof__card:hover { border-color: rgba(241,32,38,.4); transform: translateY(-2px); }
-.cnc-proof__area {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-label);
-  font-weight: 700;
-  font-size: 11.5px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--red-hot);
-  margin-bottom: 14px;
+@keyframes cnc-proof-scroll { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+@media (prefers-reduced-motion: reduce) {
+  .cnc-proof__marquee { overflow-x: auto; }
+  .cnc-proof__track { animation: none; }
 }
-.cnc-proof__area i { font-size: 16px; flex: none; }
-.cnc-proof__quote { margin: 0; font-size: 1.03rem; line-height: 1.5; color: #EDEDF2; font-weight: 500; }
-.cnc-proof__card--cta {
-  background: linear-gradient(180deg, rgba(216,34,30,.16) 0%, var(--slate) 100%);
-  border-color: rgba(241,32,38,.42);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 18px;
-}
-.cnc-proof__card--cta:hover { transform: none; }
+.cnc-proof__cta { margin-top: clamp(32px, 5vw, 48px); display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
 .cnc-proof__cta-text {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 1.4rem;
+  font-size: clamp(1.4rem, 3.4vw, 1.9rem);
   line-height: 1.1;
   text-transform: uppercase;
   color: #fff;
