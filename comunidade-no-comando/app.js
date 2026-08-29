@@ -15,7 +15,7 @@
   ];
 
   // TODO(acao): trocar pelo link real do produto/oferta na Hotmart (com sck da origem).
-  var CHECKOUT_URL = 'https://links.igtcoaching.com.br/oportunidade-cnc-p6p';
+  var CHECKOUT_URL = 'https://links.geronimo.com.br/oportunidade-cnc-p6p';
 
   var VAGAS_TOTAL = 500;   // "Atencao: apenas 500 vagas"
   var VAGAS_PCT = 18;      // % da barra de progresso
