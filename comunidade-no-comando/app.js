@@ -50,16 +50,36 @@
   }
 
   // Nenhum parametro da URL pode se perder entre o anuncio e o checkout.
+  // O snapshot e tirado no carregamento e guardado na sessao: se algum pixel
+  // limpar a query string, ou o visitante recarregar/voltar pra pagina ja sem
+  // os parametros, o clique no checkout continua levando o rastreio completo.
+  var PARAMS_KEY = 'cnc:params';
+
+  var incomingParams = (function () {
+    var current = new URLSearchParams(window.location.search);
+    var merged = new URLSearchParams(current.toString());
+    try {
+      // O que esta na URL agora manda; a sessao so completa o que faltar.
+      new URLSearchParams(sessionStorage.getItem(PARAMS_KEY) || '').forEach(function (value, key) {
+        if (!current.has(key)) merged.append(key, value);
+      });
+      sessionStorage.setItem(PARAMS_KEY, merged.toString());
+    } catch (e) {}   // sessionStorage bloqueado: segue so com o que veio na URL
+    return merged;
+  })();
+
   function withForwardedParams(baseUrl) {
     try {
       var target = new URL(baseUrl, window.location.href);
-      var incoming = new URLSearchParams(window.location.search);
-      incoming.forEach(function (value, key) {
-        if (!target.searchParams.has(key)) target.searchParams.append(key, value);
+      // Snapshot dos parametros do proprio link: o que o checkout ja define
+      // vence, e chaves repetidas na origem (a=1&a=2) chegam todas.
+      var own = new URLSearchParams(target.search);
+      incomingParams.forEach(function (value, key) {
+        if (!own.has(key)) target.searchParams.append(key, value);
       });
       // VK Metrics: identifica a venda com o anuncio Meta que originou o clique.
-      var adId = incoming.get('vk_ad_id') || '';
-      var vkSource = incoming.get('vk_source') || 'paid_metaads';
+      var adId = incomingParams.get('vk_ad_id') || '';
+      var vkSource = incomingParams.get('vk_source') || 'paid_metaads';
       var pageUrl = (window.location.origin + window.location.pathname).replace(/^https?:\/\//, '');
       target.searchParams.set('xcod', JSON.stringify({ vid: adId, vsrc: vkSource, url: pageUrl, v: 1 }));
       return target.toString();
@@ -125,7 +145,7 @@
     var v = validate();
     if (!v) return;
 
-    var params = new URLSearchParams(window.location.search);
+    var params = incomingParams;   // mesmo snapshot que vai pro checkout
     var today = new Date();
     var country = COUNTRIES.filter(function (c) { return c.code === state.country; })[0] || COUNTRIES[0];
     var payload = {

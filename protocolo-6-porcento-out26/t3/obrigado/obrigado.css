@@ -1,0 +1,202 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
+  color: #0A0A0B;
+  font-family: var(--font-body);
+}
+
+::selection { background: #F12026; color: #fff; }
+
+@keyframes ty-flow {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes ty-grow {
+  from { width: 0; }
+  to { width: 90%; }
+}
+
+/* animated brand bar at the very top — ties the page to the landing hero */
+.ty-flowbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #F12026, #A60F14, #F12026);
+  background-size: 200% 100%;
+  animation: ty-flow 6s linear infinite;
+  z-index: 10;
+}
+
+/* mesma imagem de fundo da hero da LP, em baixa opacidade */
+.ty-bg {
+  position: fixed;
+  inset: 0;
+  background-image: url('../assets/hero-geronimo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: .1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ty {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(48px, 9vw, 96px) 24px clamp(56px, 9vw, 96px);
+  gap: 0;
+}
+
+.ty__logo {
+  height: clamp(64px, 11vw, 88px);
+  width: auto;
+  display: block;
+  margin-bottom: clamp(28px, 5vw, 40px);
+}
+
+.ty__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1.02;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  margin: 0 0 clamp(30px, 5vw, 44px);
+  color: #0A0A0B;
+  text-wrap: balance;
+}
+.ty__accent { color: #F12026; }
+
+/* ---------- progress ---------- */
+.ty__progress {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 0 clamp(32px, 5vw, 44px);
+}
+.ty__progress-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 9px;
+}
+.ty__progress-label {
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #6A6A72;
+}
+.ty__progress-value {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .06em;
+  color: #F12026;
+  font-variant-numeric: tabular-nums;
+}
+.ty__progress-track {
+  height: 10px;
+  background: rgba(0, 0, 0, .08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.ty__progress-fill {
+  width: 90%;
+  height: 100%;
+  background: linear-gradient(180deg, #F12026 0%, #D1141A 100%);
+  border-radius: 999px;
+  animation: ty-grow 1s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+/* ---------- copy ---------- */
+.ty__copy {
+  font-family: var(--font-body);
+  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+  line-height: 1.6;
+  color: #2A2A2E;
+  max-width: 520px;
+  margin: 0 0 18px;
+}
+.ty__copy strong { font-weight: 700; color: #0A0A0B; }
+
+.ty__alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  background: #FFF4F4;
+  border: 1px solid rgba(241, 32, 38, .25);
+  border-radius: 8px;
+  padding: 14px 16px;
+  max-width: 520px;
+  margin: 0 0 clamp(30px, 5vw, 42px);
+  font-size: .98rem;
+  line-height: 1.45;
+  color: #1A1A1D;
+}
+.ty__alert i {
+  font-size: 20px;
+  color: #F12026;
+  flex: none;
+  margin-top: 1px;
+}
+.ty__alert strong { font-weight: 700; color: #0A0A0B; }
+
+/* ---------- button ---------- */
+.ty__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 460px;
+  padding: 19px 34px;
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: clamp(15px, 2vw, 17px);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1;
+  text-decoration: none;
+  color: #fff;
+  background: #F12026;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .18);
+  cursor: pointer;
+  transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.ty__btn:hover {
+  background: #D1141A;
+  box-shadow: 0 0 0 1px rgba(241, 32, 38, .4), 0 10px 34px rgba(241, 32, 38, .38);
+}
+.ty__btn:active { transform: translateY(1px) scale(.99); }
+.ty__btn-arrow { transition: transform .2s ease; }
+.ty__btn:hover .ty__btn-arrow { transform: translateX(4px); }
+
+.ty__redirect {
+  font-family: var(--font-label);
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: #6A6A72;
+  margin: 18px 0 0;
+}
+.ty__redirect strong {
+  color: #F12026;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}

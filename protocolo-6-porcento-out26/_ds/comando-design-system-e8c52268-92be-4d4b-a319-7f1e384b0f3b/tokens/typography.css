@@ -1,0 +1,56 @@
+/* COMANDO — Typography tokens */
+:root {
+  /* Families */
+  --font-display: 'Saira Condensed', 'Arial Narrow', sans-serif; /* headlines, command type */
+  --font-body: 'Saira', system-ui, -apple-system, sans-serif;     /* body, UI */
+  --font-label: 'Saira Semi Condensed', 'Saira', sans-serif;      /* eyebrows, tactical labels */
+
+  /* Weights */
+  --fw-regular: 400; /* @kind font */
+  --fw-medium: 500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold: 700; /* @kind font */
+  --fw-extrabold: 800; /* @kind font */
+  --fw-black: 900; /* @kind font */
+
+  /* Display scale (condensed, tight, uppercase command type) */
+  --fs-display-xl: clamp(3.5rem, 8vw, 7rem); /* @kind font */
+  --fs-display-lg: clamp(2.75rem, 5.5vw, 4.5rem); /* @kind font */
+  --fs-display-md: clamp(2rem, 3.5vw, 3rem); /* @kind font */
+  --fs-display-sm: 1.75rem; /* @kind font */
+
+  /* Heading scale (body family, strong) */
+  --fs-h1: 2.25rem; /* @kind font */
+  --fs-h2: 1.75rem; /* @kind font */
+  --fs-h3: 1.375rem; /* @kind font */
+  --fs-h4: 1.125rem; /* @kind font */
+
+  /* Body / UI scale */
+  --fs-lg: 1.25rem; /* @kind font */
+  --fs-md: 1rem; /* @kind font */
+  --fs-sm: 0.9375rem; /* @kind font */
+  --fs-xs: 0.8125rem; /* @kind font */
+  --fs-2xs: 0.6875rem; /* @kind font */
+
+  /* Line heights */
+  --lh-tight: 0.92; /* @kind other */
+  --lh-snug: 1.1; /* @kind other */
+  --lh-normal: 1.5; /* @kind other */
+  --lh-relaxed: 1.65; /* @kind other */
+
+  /* Letter spacing */
+  --ls-tight: -0.01em; /* @kind other */
+  --ls-normal: 0; /* @kind other */
+  --ls-label: 0.14em; /* @kind other */
+  --ls-wide: 0.24em; /* @kind other */
+
+  /* Display italic skew matching the wordmark's forward lean */
+  --display-skew: -7deg; /* @kind other */
+
+  /* Semantic roles */
+  --type-hero: var(--fw-black) var(--fs-display-xl)/var(--lh-tight) var(--font-display); /* @kind font */
+  --type-title: var(--fw-black) var(--fs-display-md)/var(--lh-snug) var(--font-display); /* @kind font */
+  --type-eyebrow: var(--fw-bold) var(--fs-2xs)/1 var(--font-label); /* @kind font */
+  --type-body: var(--fw-regular) var(--fs-md)/var(--lh-relaxed) var(--font-body); /* @kind font */
+  --type-button: var(--fw-bold) var(--fs-sm)/1 var(--font-label); /* @kind font */
+}
