@@ -17,6 +17,10 @@
   // TODO(acao): trocar pelo link real do produto/oferta na Hotmart (com sck da origem).
   var CHECKOUT_URL = 'https://pay.hotmart.com/C97417827Q?off=paio32a6&split=12&checkoutMode=10&hidewallet=1&sck=oportunidade-cnc-p6p';
 
+  // TODO(acao): prazo de encerramento das inscricoes. Offset -03:00 fixo: o contador
+  // marca o mesmo horario de Brasilia pra quem acessa de qualquer fuso.
+  var DEADLINE = new Date('2026-09-04T23:59:00-03:00').getTime();
+
   var COUNTRIES = [
     { code: 'BR', dial: '+55', flag: '🇧🇷' }, { code: 'US', dial: '+1', flag: '🇺🇸' }, { code: 'CA', dial: '+1', flag: '🇨🇦' },
     { code: 'PT', dial: '+351', flag: '🇵🇹' }, { code: 'AR', dial: '+54', flag: '🇦🇷' }, { code: 'CL', dial: '+56', flag: '🇨🇱' },
@@ -176,8 +180,52 @@
     window.location.href = withForwardedParams(CHECKOUT_URL);
   }
 
+  // ----- tarja fixa: contagem regressiva -----
+  // A tarja e fixa, entao a altura real dela (que muda quando o texto quebra no
+  // mobile) vira --cnc-cd-h: e isso que reserva o espaco no topo e prende a nav.
+  function initCountdown() {
+    var bar = $('#countdown');
+    if (!bar) return;
+
+    var live = $('.cnc-countdown__live', bar);
+    var over = $('.cnc-countdown__over', bar);
+    var out = {
+      d: $('[data-cd="d"]', bar), h: $('[data-cd="h"]', bar),
+      m: $('[data-cd="m"]', bar), s: $('[data-cd="s"]', bar)
+    };
+
+    var syncHeight = function () {
+      document.documentElement.style.setProperty('--cnc-cd-h', bar.offsetHeight + 'px');
+    };
+    syncHeight();
+    if ('ResizeObserver' in window) new ResizeObserver(syncHeight).observe(bar);
+    else window.addEventListener('resize', syncHeight);
+
+    var timer = null;
+    // devolve false quando o prazo acaba — quem chama e que para o intervalo
+    var tick = function () {
+      var left = DEADLINE - Date.now();
+      if (left <= 0) {
+        live.hidden = true;
+        over.hidden = false;
+        syncHeight();
+        return false;
+      }
+      var total = Math.floor(left / 1000);
+      out.d.textContent = pad(Math.floor(total / 86400));
+      out.h.textContent = pad(Math.floor(total / 3600) % 24);
+      out.m.textContent = pad(Math.floor(total / 60) % 60);
+      out.s.textContent = pad(total % 60);
+      return true;
+    };
+
+    if (tick()) timer = setInterval(function () { if (!tick()) clearInterval(timer); }, 1000);
+  }
+
   // ----- init -----
   function init() {
+    initCountdown();
+
     // seletor de DDI — Brasil sempre primeiro (e o default)
     var sel = $('#country-select');
     COUNTRIES.forEach(function (c) {

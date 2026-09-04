@@ -245,6 +245,8 @@
   --red-deep: #A81512;
   --text: #C4C4CE;
   --muted: #85858F;
+  /* altura da tarja fixa do topo — o app.js reescreve com a altura real (quebra de linha no mobile) */
+  --cnc-cd-h: 44px;
 }
 
 /* Fonte só com glifos de bandeira (Twemoji) — Windows não desenha bandeiras emoji. */
@@ -256,6 +258,9 @@
 }
 
 html, body { margin: 0; padding: 0; background: #08080A; }
+/* a .cnc-countdown e fixa: o corpo abre o espaco dela pra nada ficar por baixo */
+body { padding-top: var(--cnc-cd-h); }
+html { scroll-padding-top: calc(var(--cnc-cd-h) + 56px); }
 * { box-sizing: border-box; }
 figure, blockquote { margin: 0; }   /* o navegador da 16px 40px em figure e 1em 40px em blockquote */
 ::selection { background: #F12026; color: #fff; }
@@ -351,6 +356,37 @@ img { max-width: 100%; }
 .cnc-section__head--center .cnc-lead { margin-left: auto; margin-right: auto; max-width: 660px; }
 .cnc-band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--coal); }
 
+/* ---------- tarja fixa: contagem regressiva ---------- */
+.cnc-countdown {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;   /* acima da tarja (60) e da nav (50), abaixo do modal (100) */
+  min-height: var(--cnc-cd-h);
+  background: linear-gradient(90deg, var(--red-deep), var(--red-hot) 50%, var(--red-deep));
+  color: #fff;
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.45);
+}
+.cnc-countdown__live { display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.cnc-countdown__dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; flex: none; animation: cnc-pulse 1.6s ease-in-out infinite; }
+.cnc-countdown__clock { display: inline-flex; align-items: baseline; gap: 6px; }
+.cnc-countdown__unit { display: inline-flex; align-items: baseline; gap: 2px; }
+.cnc-countdown__unit b { font-size: 16px; font-weight: 800; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+.cnc-countdown__unit i { font-style: normal; font-size: 11px; opacity: .75; }
+.cnc-countdown__sep { opacity: .45; }
+.cnc-countdown__over { font-size: 14px; letter-spacing: .2em; }
+
 /* ---------- tarja ---------- */
 .cnc-tarja {
   background: linear-gradient(90deg, var(--red-deep), var(--red) 45%, var(--red-deep));
@@ -376,7 +412,7 @@ img { max-width: 100%; }
 /* ---------- nav ---------- */
 .cnc-nav {
   position: sticky;
-  top: 0;
+  top: var(--cnc-cd-h);
   z-index: 50;
   background: rgba(8,8,10,.82);
   backdrop-filter: blur(12px);
@@ -997,6 +1033,11 @@ img { max-width: 100%; }
   .cnc-hero__cta-row .cnc-btn { width: 100%; }
   .cnc-nav__note { display: none; }
   .cnc-tarja { letter-spacing: .12em; font-size: 11px; gap: 8px; }
+  .cnc-countdown { font-size: 11px; letter-spacing: .1em; gap: 8px; padding: 7px 12px; }
+  .cnc-countdown__live { gap: 8px; }
+  .cnc-countdown__clock { gap: 4px; }
+  .cnc-countdown__unit b { font-size: 14px; }
+  .cnc-countdown__over { font-size: 12px; letter-spacing: .14em; }
   .cnc-guarantee__inner { text-align: center; }
   /* mesma logica do hero: imagem no topo, texto embaixo */
   .cnc-author__bg {
