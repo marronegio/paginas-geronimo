@@ -260,7 +260,7 @@
 html, body { margin: 0; padding: 0; background: #08080A; }
 /* a .cnc-countdown e fixa: o corpo abre o espaco dela pra nada ficar por baixo */
 body { padding-top: var(--cnc-cd-h); }
-html { scroll-padding-top: calc(var(--cnc-cd-h) + 56px); }
+html { scroll-padding-top: var(--cnc-cd-h); }
 * { box-sizing: border-box; }
 figure, blockquote { margin: 0; }   /* o navegador da 16px 40px em figure e 1em 40px em blockquote */
 ::selection { background: #F12026; color: #fff; }
@@ -390,7 +390,10 @@ img { max-width: 100%; }
 /* ---------- nav ---------- */
 .cnc-nav {
   position: sticky;
-  top: var(--cnc-cd-h);
+  /* NAO trocar por var(--cnc-cd-h): o scrollport desta nav e o .cnc-root
+     (overflow-x:hidden -> overflow-y:auto), que o padding-top do body ja
+     desceu a altura da tarja. Repetir aqui empilha o espaco duas vezes. */
+  top: 0;
   z-index: 50;
   background: rgba(8,8,10,.82);
   backdrop-filter: blur(12px);
