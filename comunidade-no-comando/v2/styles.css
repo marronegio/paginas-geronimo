@@ -362,7 +362,7 @@ img { max-width: 100%; }
   top: 0;
   left: 0;
   right: 0;
-  z-index: 90;   /* acima da tarja (60) e da nav (50), abaixo do modal (100) */
+  z-index: 90;   /* acima da nav (50), abaixo do modal (100) */
   min-height: var(--cnc-cd-h);
   background: linear-gradient(90deg, var(--red-deep), var(--red-hot) 50%, var(--red-deep));
   color: #fff;
@@ -386,28 +386,6 @@ img { max-width: 100%; }
 .cnc-countdown__unit i { font-style: normal; font-size: 11px; opacity: .75; }
 .cnc-countdown__sep { opacity: .45; }
 .cnc-countdown__over { font-size: 14px; letter-spacing: .2em; }
-
-/* ---------- tarja ---------- */
-.cnc-tarja {
-  background: linear-gradient(90deg, var(--red-deep), var(--red) 45%, var(--red-deep));
-  color: #fff;
-  font-family: var(--font-label);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  position: relative;
-  z-index: 60;
-}
-.cnc-tarja__dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; flex: none; animation: cnc-pulse 1.6s ease-in-out infinite; }
-.cnc-tarja__sep { opacity: .45; }
 
 /* ---------- nav ---------- */
 .cnc-nav {
@@ -1032,7 +1010,6 @@ img { max-width: 100%; }
   .cnc-hero__content { max-width: none; }
   .cnc-hero__cta-row .cnc-btn { width: 100%; }
   .cnc-nav__note { display: none; }
-  .cnc-tarja { letter-spacing: .12em; font-size: 11px; gap: 8px; }
   .cnc-countdown { font-size: 11px; letter-spacing: .1em; gap: 8px; padding: 7px 12px; }
   .cnc-countdown__live { gap: 8px; }
   .cnc-countdown__clock { gap: 4px; }
