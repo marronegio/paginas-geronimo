@@ -2,7 +2,7 @@
   'use strict';
 
   var EVENT_DATE = '2026-10-17T09:00:00-03:00';
-  var VAGAS_PCT = 35;
+  var VAGAS_PCT = 75;
 
   var WEBHOOKS = [
     // IGT: devolve headers CORS, aceita application/json.
@@ -20,8 +20,8 @@
 
   var LOTES = [
     { num: 1, price: 32, start: '2026-07-02T00:00:00-03:00', end: '2026-08-18T23:59:59.999-03:00', url: 'https://pay.hotmart.com/T107350876K?off=ic977dei&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-out26-lote1-org' },
-    { num: 2, price: 37, start: '2026-08-19T00:00:00-03:00', end: '2026-08-25T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=qwgs2eny&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote2-org' },
-    { num: 3, price: 42, start: '2026-08-26T00:00:00-03:00', end: '2026-08-28T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=9sb3xkmn&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote3-org' }
+    { num: 2, price: 147, start: '2026-08-19T00:00:00-03:00', end: '2026-08-25T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=qwgs2eny&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote2-org' },
+    { num: 3, price: 297, start: '2026-08-26T00:00:00-03:00', end: '2026-08-28T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=9sb3xkmn&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote3-org' }
   ];
 
   var COUNTRIES = [
