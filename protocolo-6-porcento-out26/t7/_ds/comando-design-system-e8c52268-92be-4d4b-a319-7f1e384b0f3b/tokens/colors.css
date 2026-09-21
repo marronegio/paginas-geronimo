@@ -1,0 +1,72 @@
+/* COMANDO — Color tokens
+ * System: black + red, with white as the dominant text color.
+ * Red is reserved for command moments — CTAs, accents, the arrow motif — never large fills of body text.
+ */
+:root {
+  /* ===== Base palette ===== */
+  --black: #000000;
+  --ink-900: #0A0A0B;   /* near-black surface */
+  --ink-850: #121214;   /* raised surface */
+  --ink-800: #1A1A1D;   /* card surface */
+  --ink-700: #262629;   /* hairline / border on dark */
+  --ink-600: #3A3A3F;   /* stronger border */
+  --ink-500: #56565D;   /* disabled text */
+  --ink-400: #8A8A93;   /* muted text */
+  --ink-300: #B6B6BD;   /* secondary text */
+
+  --white: #FFFFFF;
+  --paper: #F4F4F2;     /* off-white light surface */
+  --paper-dim: #DCDCD8;
+
+  /* COMANDO red */
+  --red-500: #F12026;   /* brand red (sampled from wordmark) */
+  --red-600: #D1141A;   /* hover / pressed */
+  --red-700: #A60F14;   /* deep */
+  --red-400: #FF4A4F;   /* bright / glow */
+  --red-tint-12: rgba(241, 32, 38, 0.12);
+  --red-tint-20: rgba(241, 32, 38, 0.20);
+
+  /* Support accents (use sparingly) */
+  --gold-500: #E8B23A;  /* honor / achievement */
+  --green-500: #34C759; /* success / completed */
+
+  /* ===== Semantic aliases (default theme = dark/command) ===== */
+  --bg-base: var(--black);
+  --bg-raised: var(--ink-850);
+  --surface-card: var(--ink-800);
+  --surface-card-hover: var(--ink-700);
+
+  --border-hairline: var(--ink-700);
+  --border-strong: var(--ink-600);
+  --border-focus: var(--red-500);
+
+  --text-primary: var(--white);
+  --text-secondary: var(--ink-300);
+  --text-muted: var(--ink-400);
+  --text-disabled: var(--ink-500);
+  --text-onred: var(--white);
+  --text-inverse: var(--ink-900);
+
+  --accent: var(--red-500);
+  --accent-hover: var(--red-600);
+  --accent-press: var(--red-700);
+  --accent-glow: var(--red-400);
+
+  --focus-ring: rgba(241, 32, 38, 0.55);
+  --overlay-scrim: rgba(0, 0, 0, 0.72);
+}
+
+/* Light "briefing" theme — rarely used (printed material, light sections). */
+[data-theme="light"] {
+  --bg-base: var(--paper);
+  --bg-raised: var(--white);
+  --surface-card: var(--white);
+  --surface-card-hover: var(--paper-dim);
+  --border-hairline: rgba(0,0,0,0.10);
+  --border-strong: rgba(0,0,0,0.20);
+  --text-primary: var(--ink-900);
+  --text-secondary: #44444A;
+  --text-muted: #6A6A72;
+  --text-disabled: #A6A6AE;
+  --text-inverse: var(--white);
+}
