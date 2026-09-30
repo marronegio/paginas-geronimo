@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Um recado antes de continuar · Protocolo 6%</title>
+  <meta name="description"
+    content="Antes de seguir, assista a este vídeo. Ele explica por que você chegou até aqui e não na página de outra ação.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/SairaCondensed-900-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Saira-400-latin.woff2" crossorigin>
+  <style>
+    /* ===== Fontes (mesma identidade da página principal) ===== */
+    @font-face{font-family:"Saira Fallback";src:local('Arial'),local('ArialMT');font-display:swap;ascent-override:109.5203%;descent-override:42.3607%;line-gap-override:0%;size-adjust:103.6337%}
+    @font-face{font-family:"Saira Condensed Fallback";src:local('Arial'),local('ArialMT');font-display:swap;ascent-override:143.3382%;descent-override:55.4409%;line-gap-override:0%;size-adjust:79.1834%}
+    @font-face{font-family:"Saira Semi Condensed Fallback";src:local('Arial'),local('ArialMT');font-display:swap;ascent-override:123.7124%;descent-override:47.85%;line-gap-override:0%;size-adjust:91.745%}
+    @font-face{font-family:Saira;font-style:normal;font-weight:400;font-display:swap;src:url('../assets/fonts/Saira-400-latin.woff2') format('woff2')}
+    @font-face{font-family:Saira;font-style:normal;font-weight:600;font-display:swap;src:url('../assets/fonts/Saira-400-latin.woff2') format('woff2')}
+    @font-face{font-family:Saira;font-style:normal;font-weight:700;font-display:swap;src:url('../assets/fonts/Saira-400-latin.woff2') format('woff2')}
+    @font-face{font-family:'Saira Condensed';font-style:normal;font-weight:800;font-display:swap;src:url('../assets/fonts/SairaCondensed-800-latin.woff2') format('woff2')}
+    @font-face{font-family:'Saira Condensed';font-style:normal;font-weight:900;font-display:swap;src:url('../assets/fonts/SairaCondensed-900-latin.woff2') format('woff2')}
+    @font-face{font-family:'Saira Semi Condensed';font-style:normal;font-weight:600;font-display:swap;src:url('../assets/fonts/SairaSemiCondensed-600-latin.woff2') format('woff2')}
+    @font-face{font-family:'Saira Semi Condensed';font-style:normal;font-weight:700;font-display:swap;src:url('../assets/fonts/SairaSemiCondensed-700-latin.woff2') format('woff2')}
+
+    :root{
+      --font-display:'Saira Condensed','Saira Condensed Fallback','Arial Narrow',sans-serif;
+      --font-body:'Saira','Saira Fallback',system-ui,-apple-system,sans-serif;
+      --font-label:'Saira Semi Condensed','Saira Semi Condensed Fallback',sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    ::selection{background:#f12026;color:#fff}
+
+    body{
+      background:#0a0a0b;
+      color:#fff;
+      font-family:var(--font-body);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    /* fundo com brilho vermelho e linhas (igual seção de fechamento) */
+    .dc-glow{position:absolute;inset:0;background:radial-gradient(90% 60% at 50% -8%,rgba(241,32,38,.22) 0,transparent 55%);pointer-events:none;z-index:0}
+    .dc-lines{position:absolute;inset:0;opacity:.4;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 96px);pointer-events:none;z-index:0}
+    .dc-flowbar{position:fixed;left:0;top:0;height:4px;width:100%;background:linear-gradient(90deg,#f12026,#a60f14,#f12026);background-size:200% 100%;animation:6s linear infinite dc-flow;z-index:5}
+    @keyframes dc-flow{0%{background-position:0 0}100%{background-position:200% 0}}
+    @keyframes dc-pulse{0%,100%{opacity:.55}50%{opacity:1}}
+
+    .dc-inner{
+      position:relative;
+      z-index:1;
+      flex:1;
+      width:100%;
+      max-width:1280px;
+      margin:0 auto;
+      padding:clamp(40px,7vw,80px) 24px clamp(56px,8vw,90px);
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .dc-head{
+      display:flex;align-items:center;justify-content:center;
+      flex-wrap:wrap;gap:clamp(14px,2.5vw,26px);margin-bottom:34px
+    }
+    .dc-logo{height:clamp(44px,6vw,58px);width:auto;display:block}
+
+    .dc-badge{
+      display:inline-flex;align-items:center;gap:10px;
+      border:1px solid rgba(241,32,38,.4);background:rgba(241,32,38,.08);
+      color:#ff6b6f;font-family:var(--font-label);font-weight:700;font-size:12px;
+      letter-spacing:.2em;text-transform:uppercase;padding:8px 14px;border-radius:2px
+    }
+    .dc-badge__dot{width:8px;height:8px;border-radius:50%;background:#f12026;animation:1.6s ease-in-out infinite dc-pulse}
+
+    .dc-title{
+      font-family:var(--font-display);font-weight:900;
+      font-size:clamp(2rem,5vw,3.6rem);line-height:.98;letter-spacing:-.01em;
+      text-transform:uppercase;margin:0 0 20px;text-wrap:balance
+    }
+    .dc-accent{color:#f12026}
+    .dc-accent-bright{color:#ff4a4f}
+
+    .dc-lead{
+      font-size:clamp(1.05rem,1.7vw,1.28rem);line-height:1.6;color:#c4c4cb;
+      max-width:940px;margin:0 0 38px
+    }
+    .dc-lead strong{color:#fff;font-weight:700}
+
+    /* player de vídeo responsivo */
+    .dc-video{
+      position:relative;width:100%;max-width:760px;aspect-ratio:16/9;
+      background:#000;border:1px solid rgba(255,255,255,.1);border-top:3px solid #f12026;
+      border-radius:10px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.6);margin:0 auto
+    }
+    .dc-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+    .dc-note{
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      font-family:var(--font-label);font-weight:600;font-size:12px;letter-spacing:.12em;
+      text-transform:uppercase;color:#8a8a93;margin:16px 0 0
+    }
+
+    /* botão (mesmo estilo dos CTAs) */
+    .dc-cta-wrap{margin-top:40px}
+    .dc-btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      font-family:var(--font-label);font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+      line-height:1;border:2px solid transparent;border-radius:4px;cursor:pointer;white-space:nowrap;
+      text-decoration:none;padding:17px 34px;font-size:16px;
+      background:#d1141a;color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.18);
+      transition:background .18s,box-shadow .18s,transform .18s
+    }
+    .dc-btn:hover{background:#b31016;box-shadow:0 0 0 1px rgba(241,32,38,.4),0 8px 30px rgba(241,32,38,.35)}
+    .dc-btn:active{transform:translateY(1px) scale(.99)}
+    .dc-btn__arrow{transition:transform .2s}
+    .dc-btn:hover .dc-btn__arrow{transform:translateX(4px)}
+
+    .dc-subnote{font-family:var(--font-label);font-weight:600;font-size:13px;letter-spacing:.05em;color:#8a8a93;margin:18px 0 0}
+
+    /* rodapé */
+    .dc-footer{position:relative;z-index:1;background:#050506;border-top:1px solid rgba(255,255,255,.06);padding:28px 24px;text-align:center}
+    .dc-footer__logo{height:36px;width:auto;display:block;margin:0 auto 12px}
+    .dc-footer__text{margin:0;font-size:13px;letter-spacing:.04em;color:#8a8a93}
+    .dc-footer__copy{margin:6px 0 0;font-size:12px;color:#6a6a72}
+
+    /* ===== Desktop: tudo cabe na tela, sem rolar ===== */
+    @media (min-width:900px){
+      html,body{height:100%}
+      body{height:100vh;overflow:hidden}
+      .dc-inner{
+        flex:1;justify-content:center;
+        padding:clamp(16px,2.4vh,32px) 24px clamp(10px,1.6vh,20px);
+      }
+      .dc-head{margin-bottom:clamp(10px,1.8vh,22px)}
+      .dc-logo{height:clamp(36px,4.4vh,50px)}
+      .dc-title{font-size:clamp(2.1rem,4vh,3.5rem);margin:0 0 clamp(8px,1.4vh,16px)}
+      .dc-lead{font-size:clamp(.98rem,1.85vh,1.18rem);line-height:1.5;margin:0 0 clamp(14px,2.4vh,28px)}
+      /* o vídeo é dimensionado pela altura disponível para caber junto do resto */
+      .dc-video{width:auto;max-width:100%;height:clamp(240px,42vh,430px);aspect-ratio:16/9}
+      .dc-note{margin-top:clamp(8px,1.2vh,14px)}
+      .dc-cta-wrap{margin-top:clamp(16px,2.6vh,32px)}
+      .dc-subnote{margin-top:clamp(8px,1.2vh,16px)}
+      .dc-footer{padding:clamp(12px,1.8vh,20px) 24px}
+      .dc-footer__logo{height:clamp(26px,3vh,34px);margin-bottom:clamp(6px,0.8vh,10px)}
+    }
+
+    /* telas baixas: garante que nada seja cortado */
+    @media (min-width:900px) and (max-height:640px){
+      body{overflow-y:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dc-flowbar"></div>
+  <div class="dc-glow"></div>
+  <div class="dc-lines"></div>
+
+  <main class="dc-inner">
+    <div class="dc-head">
+      <img src="../assets/logo-protocolo6-onblack.webp" alt="Protocolo 6%" class="dc-logo" width="130" height="64">
+      <span class="dc-badge"><span class="dc-badge__dot"></span> Assista antes de continuar</span>
+    </div>
+
+    <h1 class="dc-title">
+      Calma — você caiu <span class="dc-accent">exatamente</span> onde deveria.
+    </h1>
+
+    <p class="dc-lead">
+      Talvez você esperasse cair na página do <strong>Destrave o Coach que Existe em Você</strong>. Antes de seguir, assista ao vídeo
+      abaixo: em poucos minutos ele explica <strong>o motivo de você ter chegado até aqui</strong> e o que
+      fazer a partir de agora.
+    </p>
+
+    <div class="dc-video">
+      <iframe
+        src="https://www.youtube.com/embed/YJxa0cvOEsI?rel=0"
+        title="Por que você caiu nesta página · Protocolo 6%"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+    </div>
+
+    <p class="dc-note">Recomendado assistir até o final</p>
+
+    <div class="dc-cta-wrap">
+      <a class="dc-btn" href="../index.html">Ir para a página principal<span class="dc-btn__arrow" aria-hidden="true">→</span></a>
+    </div>
+    <p class="dc-subnote">Você será levado ao Protocolo 6%</p>
+  </main>
+
+  <footer class="dc-footer">
+    <img src="../assets/logo-protocolo6-onblack.webp" alt="Protocolo 6%" class="dc-footer__logo" width="72" height="36">
+    <p class="dc-footer__text">Uma imersão de Geronimo Theml · IGT International Coaching</p>
+    <p class="dc-footer__copy">© 2026 · Todos os direitos reservados</p>
+  </footer>
+</body>
+
+</html>
