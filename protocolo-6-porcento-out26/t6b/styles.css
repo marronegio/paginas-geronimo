@@ -418,12 +418,22 @@ html, body { margin: 0; padding: 0; background: #FFFFFF; }
 
 /* ---------- nav ---------- */
 .p6-nav {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
+  transform: translateY(-100%);
+  visibility: hidden;
+  transition: transform .3s ease, visibility 0s linear .3s;
   background: rgba(255,255,255,.86);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0,0,0,.08);
+}
+.p6-nav.is-visible {
+  transform: translateY(0);
+  visibility: visible;
+  transition: transform .3s ease, visibility 0s;
 }
 .p6-nav__inner {
   max-width: 1200px;
@@ -498,7 +508,7 @@ html, body { margin: 0; padding: 0; background: #FFFFFF; }
   font-size: clamp(2.6rem,5vw,4.4rem);
   line-height: 1;
   letter-spacing: -.01em;
-  text-transform: uppercase;
+  text-transform: none;
   margin: 0 0 22px;
   color: #0A0A0B;
   text-wrap: balance;

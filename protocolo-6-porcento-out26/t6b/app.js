@@ -237,6 +237,15 @@
     $('#checkout-form').addEventListener('submit', function (ev) { ev.preventDefault(); submitForm(); });
     document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !overlay.hidden) closeCheckout(); });
 
+    // nav só aparece depois da primeira dobra (quando o hero sai da tela)
+    var nav = $('.p6-nav'), hero = $('.p6-hero');
+    if (nav && hero) {
+      var syncNav = function () { nav.classList.toggle('is-visible', hero.getBoundingClientRect().bottom <= 0); };
+      window.addEventListener('scroll', syncNav, { passive: true });
+      window.addEventListener('resize', syncNav);
+      syncNav();
+    }
+
     // countdown + lote
     tick();
     setInterval(tick, 1000);
