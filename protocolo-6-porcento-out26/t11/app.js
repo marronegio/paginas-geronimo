@@ -11,17 +11,16 @@
     { url: 'https://functions-api.clint.digital/endpoints/integration/webhook/87bf5aa8-71de-405d-bcc0-6e3f40af8e91', mode: 'no-cors', ct: 'text/plain;charset=UTF-8' }
   ];
 
-  // Edicao de 17/10/2026: pagina travada no Lote 1 ate o cronograma de outubro ser definido.
+  // Edicao de 17/10/2026: Lote 1 ate 13/10 23:58, Lote 2 a partir de 13/10 23:59 (virada automatica no navegador).
   // Para travar a pagina em um lote especifico: LOTE_FIXO = <numero do lote>.
-  var LOTE_FIXO = 1;
+  var LOTE_FIXO = null;
 
   // Janela em que a contagem do lote fica visivel na tarja: as 24h finais do lote.
   var LOTE_BAR_WINDOW_MS = 86400000;
 
   var LOTES = [
-    { num: 1, price: 32, start: '2026-07-02T00:00:00-03:00', end: '2026-08-18T23:59:59.999-03:00', url: 'https://pay.hotmart.com/T107350876K?off=ic977dei&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-out26-lote1-org' },
-    { num: 2, price: 37, start: '2026-08-19T00:00:00-03:00', end: '2026-08-25T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=qwgs2eny&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote2-org' },
-    { num: 3, price: 42, start: '2026-08-26T00:00:00-03:00', end: '2026-08-28T23:59:59.999-03:00', url: 'https://pay.hotmart.com/X106563861U?off=9sb3xkmn&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-ago26-lote3-org' }
+    { num: 1, price: 32, start: '2026-07-02T00:00:00-03:00', end: '2026-10-13T23:58:59.999-03:00', url: 'https://pay.hotmart.com/T107350876K?off=ic977dei&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-out26-lote1-org' },
+    { num: 2, price: 37, start: '2026-10-13T23:59:00-03:00', end: '2026-10-17T09:00:00-03:00', url: 'https://pay.hotmart.com/T107350876K?off=2xqb373s&split=12&checkoutMode=10&hidewallet=1&sck=protocolo6porcento-out26-lote2-org&bid=1791925957897' }
   ];
 
   var COUNTRIES = [
