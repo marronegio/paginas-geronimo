@@ -121,6 +121,7 @@
       whatsapp: country.dial + ' ' + v.phoneRaw,
       telefone: country.dial + v.phoneDigits,
       pagina: (function () { var el = $('#in-pagina'); return el ? el.value : ''; })(),
+      form_name: (function () { var el = $('#inscricao').elements.form_name; return el ? el.value : ''; })(),   // de qual pagina veio o lead
       utm_campaign: params.get('utm_campaign') || '',
       utm_medium: params.get('utm_medium') || '',
       utm_source: params.get('utm_source') || '',

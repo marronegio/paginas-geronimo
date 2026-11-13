@@ -1,0 +1,208 @@
+/* =========================================================================
+   BLACK FORA DA MÉDIA 2026 — LP "Estamos ao vivo"
+   Página de uma tela só: o lead preenche e cai direto na live do YouTube.
+   Fonte de verdade do CSS. O navegador NÃO lê este arquivo: lê o <style>
+   inline do index.html. Editou aqui? Regere o inline (ver README.md).
+   Igual nas duas variantes (oportunidade-ao-vivo-v1 e -v2).
+   Prefixo de classe: bf-
+   ========================================================================= */
+
+@font-face{font-family:'Anton';src:url('assets/fonts/Anton-latin.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Arimo';src:url('assets/fonts/Arimo-latin.woff2') format('woff2');font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Arimo';src:url('assets/fonts/Arimo-italic-latin.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+/* Impact tem caixa-alta mais alta que a Anton: o size-adjust evita o "pulo" quando a fonte real chega */
+@font-face{font-family:'Anton Fallback';src:local('Impact');size-adjust:94%;ascent-override:118%;descent-override:33%;line-gap-override:0%}
+@font-face{font-family:'Twemoji Country Flags';unicode-range:U+1F1E6-1F1FF,U+1F3F4,U+E0062-E0063,U+E0065,U+E0067,U+E006C,U+E006E,U+E0073-E0074,U+E0077,U+E007F;src:url('assets/TwemojiCountryFlags.woff2') format('woff2');font-display:swap}
+
+:root{
+  /* paleta do manual: preto #000100 + amarelo #FEC108; o resto são tons de apoio */
+  --bf-black:#000100;
+  --bf-ink:#0E0E0C;
+  --bf-tape:#232321;
+  --bf-line:#2E2D29;
+  --bf-yellow:#FEC108;
+  --bf-yellow-hot:#FFD03D;
+  --bf-paper:#F4F2EC;
+  --bf-mute:#A9A79F;
+  /* vermelho "no ar": SÓ nos sinais de transmissão (ponto da faixa, lâmpada, REC).
+     O deep é o fundo da lâmpada (texto branco passa de 4.5:1); o claro é o ponto que brilha. */
+  --bf-live:#FF3B2F;
+  --bf-live-deep:#D4211A;
+  /* todos os sinais de "ao vivo" piscam no mesmo compasso, como um só equipamento */
+  --bf-beat:1.2s;
+  --bf-display:'Anton','Anton Fallback',Impact,'Arial Narrow',sans-serif;
+  --bf-body:'Arimo',Arial,Helvetica,sans-serif;
+  --bf-gutter:clamp(20px,5vw,56px);
+  --bf-max:1280px;
+  --bf-tapes:clamp(84px,9vw,128px);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bf-black);color:var(--bf-paper);font-family:var(--bf-body);font-size:clamp(1rem,.96rem + .2vw,1.125rem);line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{display:block;max-width:100%;height:auto}
+h1,p{margin:0}
+a{color:inherit}
+strong{font-weight:700}
+::selection{background:var(--bf-yellow);color:var(--bf-black)}
+:focus-visible{outline:3px solid var(--bf-yellow);outline-offset:3px}
+.bf-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+.bf-root{overflow-x:clip}
+.bf-wrap{width:100%;max-width:var(--bf-max);margin:0 auto;padding:0 var(--bf-gutter)}
+
+/* ---------- botão (pílula do manual; o triângulo deitado é o "play") ---------- */
+.bf-btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;min-height:58px;padding:16px 34px;border:0;border-radius:999px;background:var(--bf-yellow);color:var(--bf-black);font:700 clamp(1rem,.95rem + .25vw,1.15rem)/1.15 var(--bf-body);text-transform:uppercase;letter-spacing:.02em;text-decoration:none;cursor:pointer;transition:transform .18s ease,background-color .18s ease,box-shadow .18s ease}
+.bf-btn:hover{background:var(--bf-yellow-hot);transform:translateY(-2px);box-shadow:0 10px 24px -12px rgba(0,0,0,.7)}
+.bf-btn:active{transform:translateY(0)}
+.bf-btn__tri{width:0;height:0;border-left:.42em solid transparent;border-right:.42em solid transparent;border-bottom:.72em solid currentColor;transform:rotate(90deg);flex:none}
+.bf-btn--block{width:100%}
+.bf-btn[disabled]{opacity:.7;cursor:progress;transform:none}
+
+/* ---------- faixa rodando (barra superior) ----------
+   Duas metades iguais na trilha; ela anda -50% e recomeça sem emenda.
+   Cada metade tem 3 repetições pra cobrir até telas de 2.500px. */
+.bf-ticker{position:relative;z-index:3;overflow:hidden;background:var(--bf-yellow);color:var(--bf-black);font:400 clamp(.74rem,.7rem + .2vw,.86rem)/1 var(--bf-body);letter-spacing:.06em;text-transform:uppercase;padding:12px 0}
+.bf-ticker__track{display:flex;width:max-content;animation:bf-ticker 34s linear infinite}
+.bf-ticker__item{display:inline-flex;align-items:center;gap:12px;padding-right:48px;white-space:nowrap}
+.bf-ticker__item b{font-weight:700}
+.bf-ticker__item em{font-style:italic}
+.bf-ticker__dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--bf-live-deep);box-shadow:0 0 0 2px var(--bf-black);animation:bf-blink var(--bf-beat) ease-in-out infinite}
+@keyframes bf-ticker{to{transform:translateX(-50%)}}
+
+/* ---------- hero ---------- */
+.bf-hero{position:relative;isolation:isolate;display:flex;flex-direction:column;min-height:calc(100svh - 38px);background:var(--bf-black)}
+.bf-hero__bg{position:absolute;inset:0;z-index:-1;background:url('assets/hero-geronimo.webp?v=2') 72% 0/cover no-repeat}
+/* scrim do lado do texto: a foto já é escura, mas o form precisa de chão firme */
+.bf-hero__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bf-black) 0%,rgba(0,1,0,.92) 30%,rgba(0,1,0,.55) 50%,rgba(0,1,0,0) 68%),linear-gradient(0deg,var(--bf-black) 0%,rgba(0,1,0,0) 22%)}
+.bf-hero__inner{position:relative;z-index:2;flex:1;padding-top:clamp(28px,3.6vw,52px);padding-bottom:clamp(16px,2vw,28px)}
+.bf-hero__copy{max-width:660px}
+.bf-hero__logo{width:clamp(200px,19vw,250px);height:auto;margin-bottom:clamp(20px,2.4vw,30px)}
+/* headline longa (~130 caracteres): corpo contido pra caber em 4 linhas e o form subir pra 1a dobra */
+.bf-hero__title{font-family:var(--bf-display);font-weight:400;text-transform:uppercase;line-height:1.1;letter-spacing:0;font-size:clamp(1.9rem,1.25rem + 1.8vw,2.6rem);text-wrap:pretty}
+.bf-hero__title em{font-style:normal;color:var(--bf-yellow)}
+.bf-hero__lead{margin-top:clamp(14px,1.6vw,20px);max-width:560px;color:#D9D7D0;font-size:clamp(1rem,.95rem + .3vw,1.18rem)}
+.bf-hero__lead strong{color:var(--bf-paper)}
+
+/* ---------- "estamos ao vivo" + data (a lâmpada de NO AR acesa) ---------- */
+.bf-onair{display:flex;flex-wrap:wrap;align-items:stretch;width:max-content;max-width:100%;margin-top:clamp(18px,2.2vw,26px);border:1px solid var(--bf-line);border-radius:14px;background:rgba(14,14,12,.72)}
+.bf-onair__lamp{display:flex;align-items:center;gap:14px;padding:12px 20px 12px 18px;border-radius:13px 0 0 13px;background:var(--bf-live-deep);color:#fff;font:400 clamp(1.1rem,1rem + .35vw,1.3rem)/1 var(--bf-display);text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;animation:bf-lamp var(--bf-beat) ease-in-out infinite}
+.bf-onair__when{display:flex;flex-direction:column;justify-content:center;padding:8px 18px;font-size:.95rem;line-height:1.35}
+.bf-onair__when span{color:var(--bf-mute);font-size:.86rem}
+/* ponto branco com duas ondas saindo, defasadas meio compasso */
+.bf-pulse{position:relative;flex:none;width:11px;height:11px;border-radius:50%;background:#fff}
+.bf-pulse::before,.bf-pulse::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #fff;opacity:0;animation:bf-ripple calc(var(--bf-beat) * 2) cubic-bezier(.2,.6,.3,1) infinite}
+.bf-pulse::after{animation-delay:var(--bf-beat)}
+@keyframes bf-lamp{50%{box-shadow:0 0 0 1px rgba(255,59,47,.5),0 0 30px 2px rgba(255,59,47,.5)}}
+@keyframes bf-ripple{from{transform:scale(1);opacity:.9}to{transform:scale(3.2);opacity:0}}
+@keyframes bf-blink{50%{opacity:.2}}
+
+/* ---------- formulário (aberto no topo: nada entre o lead e a live) ---------- */
+.bf-form{margin-top:clamp(18px,2.2vw,26px);padding:clamp(14px,1.6vw,20px);border-radius:20px;border:1px solid rgba(254,193,8,.32);background:linear-gradient(165deg,rgba(4,4,3,.94) 0%,rgba(8,7,5,.9) 55%,rgba(111,83,7,.62) 100%);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
+.bf-form__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.bf-field{display:block;min-width:0}
+.bf-field--full{grid-column:1/-1}
+.bf-input{width:100%;min-width:0;height:54px;padding:0 16px;border-radius:12px;border:1px solid #3A3934;background:var(--bf-black);color:var(--bf-paper);font:400 1rem var(--bf-body);outline:0;transition:border-color .15s ease,box-shadow .15s ease}
+.bf-input::placeholder{color:#8C8A82}
+.bf-input:focus{border-color:var(--bf-yellow);box-shadow:0 0 0 3px rgba(254,193,8,.22)}
+.bf-input[aria-invalid="true"]{border-color:#FF6B4A}
+.bf-phone{display:flex;gap:8px}
+.bf-phone__ddi{flex:none;width:96px;padding:0 6px 0 10px;font-family:'Twemoji Country Flags',var(--bf-body);font-size:.92rem;cursor:pointer}
+.bf-phone .bf-input:last-child{flex:1}
+.bf-form__error{margin-top:12px;color:#FF8A6E;font-size:.92rem;font-weight:700}
+.bf-form__submit{margin-top:12px}
+.bf-form__micro{margin-top:12px;font-size:.86rem;line-height:1.45;color:var(--bf-mute);text-align:center}
+
+/* ---------- visor da câmera sobre a foto ----------
+   Cantoneiras amarelas "travam o foco" no Geronimo ao carregar; REC pisca no
+   compasso da lâmpada, o tempo de gravação corre e o medidor de áudio mexe.
+   Começa à direita do texto (660px de coluna + 40px de respiro) e nunca antes de 55%.
+   Altura: cabe na 1a dobra (100svh) e nunca invade as faixas do pé do topo. */
+.bf-vf{--t:clamp(24px,3vw,44px);position:absolute;z-index:1;pointer-events:none;top:var(--t);height:min(calc(100svh - 38px - 2 * var(--t)),calc(100% - var(--t) - var(--bf-tapes) - 4px));right:max(var(--bf-gutter),calc((100% - var(--bf-max)) / 2 + var(--bf-gutter)));left:max(55%,calc(max(0px,(100% - var(--bf-max)) / 2) + var(--bf-gutter) + 700px))}
+.bf-vf__c{position:absolute;width:clamp(30px,3.2vw,52px);aspect-ratio:1;border:0 solid var(--bf-yellow);animation:bf-lock .95s cubic-bezier(.2,.8,.2,1) .25s both}
+.bf-vf__c--tl{top:0;left:0;border-width:3px 0 0 3px;--dx:-28px;--dy:-28px}
+.bf-vf__c--tr{top:0;right:0;border-width:3px 3px 0 0;--dx:28px;--dy:-28px}
+.bf-vf__c--bl{bottom:0;left:0;border-width:0 0 3px 3px;--dx:-28px;--dy:28px}
+.bf-vf__c--br{bottom:0;right:0;border-width:0 3px 3px 0;--dx:28px;--dy:28px}
+/* chega de fora, passa um pouco do ponto, acerta e pisca uma vez: foco travado */
+@keyframes bf-lock{0%{opacity:0;transform:translate(var(--dx),var(--dy))}55%{opacity:1;transform:translate(calc(var(--dx) * -.1),calc(var(--dy) * -.1))}70%{opacity:1;transform:none}80%{opacity:.3}100%{opacity:1;transform:none}}
+.bf-vf__rec{position:absolute;top:clamp(14px,1.5vw,22px);left:clamp(16px,1.7vw,26px);display:flex;align-items:center;gap:10px;font:700 clamp(.8rem,.76rem + .2vw,.95rem)/1 var(--bf-body);letter-spacing:.08em;color:var(--bf-paper);text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.bf-vf__dot{flex:none;width:11px;height:11px;border-radius:50%;background:var(--bf-live);box-shadow:0 0 10px var(--bf-live);animation:bf-blink var(--bf-beat) steps(1) infinite}
+.bf-vf__tc{font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:.06em}
+/* medidor de áudio (2 canais): trilho apagado + trecho aceso recortado por clip-path */
+.bf-vf__meter{position:absolute;left:clamp(16px,1.7vw,26px);bottom:clamp(14px,1.5vw,22px);display:grid;gap:4px}
+.bf-vf__lvl{position:relative;display:block;width:clamp(96px,9vw,132px);height:5px;background:rgba(244,242,236,.22);-webkit-mask-image:repeating-linear-gradient(90deg,#000 0 7px,transparent 7px 10px);mask-image:repeating-linear-gradient(90deg,#000 0 7px,transparent 7px 10px)}
+.bf-vf__lvl::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bf-yellow) 0 76%,var(--bf-live) 76%);animation:bf-lvl 1.7s steps(1) infinite}
+.bf-vf__lvl+.bf-vf__lvl::after{animation-duration:1.3s;animation-delay:-.4s}
+@keyframes bf-lvl{0%{clip-path:inset(0 62% 0 0)}10%{clip-path:inset(0 30% 0 0)}20%{clip-path:inset(0 44% 0 0)}30%{clip-path:inset(0 18% 0 0)}40%{clip-path:inset(0 52% 0 0)}50%{clip-path:inset(0 36% 0 0)}60%{clip-path:inset(0 70% 0 0)}70%{clip-path:inset(0 26% 0 0)}80%{clip-path:inset(0 40% 0 0)}90%{clip-path:inset(0 58% 0 0)}}
+
+/* ---------- faixas (grafismo do manual) ---------- */
+/* logo-linha(-preto).png: 829x48, já com o respiro no fim — por isso o passo do loop é altura × 17.27 */
+.bf-tapes{position:relative;z-index:1;height:var(--bf-tapes);overflow:hidden;pointer-events:none}
+.bf-tape{position:absolute;left:-8%;width:116%;height:clamp(32px,3.2vw,44px);display:flex;align-items:center;--h:clamp(14px,1.4vw,19px)}
+.bf-tape--y{top:22%;background:var(--bf-yellow);transform:rotate(-2.6deg);z-index:2}
+.bf-tape--d{top:46%;background:var(--bf-tape);transform:rotate(2deg)}
+.bf-tape__run{width:100%;height:var(--h);animation:bf-run 26s linear infinite}
+.bf-tape--y .bf-tape__run{background:url('assets/logo-linha-preto.png') 0 0/auto 100% repeat-x}
+.bf-tape--d .bf-tape__run{background:url('assets/logo-linha.png') 0 0/auto 100% repeat-x;animation-direction:reverse}
+@keyframes bf-run{to{background-position:calc(var(--h) * -17.27) 0}}
+
+/* ---------- rodapé ---------- */
+.bf-footer{padding:20px 0 36px;text-align:center;color:var(--bf-mute);font-size:.86rem;line-height:1.6}
+.bf-footer__event{color:var(--bf-paper);font-weight:700}
+
+/* ---------- CTA fixo: só enquanto o formulário ainda está abaixo da tela ---------- */
+.bf-sticky{position:fixed;right:clamp(16px,2.4vw,32px);bottom:clamp(16px,2.4vw,32px);z-index:20;transform:translateY(calc(100% + 40px));opacity:0;transition:transform .32s cubic-bezier(.2,.7,.2,1),opacity .2s ease;pointer-events:none}
+.bf-sticky.is-on{transform:none;opacity:1;pointer-events:auto}
+.bf-sticky .bf-btn{box-shadow:0 0 0 3px var(--bf-black),0 16px 36px -10px rgba(0,0,0,.85)}
+
+/* ---------- sem animação: tudo parado, mas legível ---------- */
+@media (prefers-reduced-motion:reduce){
+  .bf-ticker__track,.bf-ticker__dot,.bf-onair__lamp,.bf-pulse::before,.bf-pulse::after,.bf-vf__c,.bf-vf__dot,.bf-tape__run{animation:none}
+  .bf-vf__lvl::after{animation:none;clip-path:inset(0 40% 0 0)}
+}
+
+/* ---------- notebook de tela baixa (1366x768 e afins): tudo mais junto pro botão ficar na 1a dobra ---------- */
+@media (min-width:1100px) and (max-height:820px){
+  .bf-hero__inner{padding-top:22px}
+  .bf-hero__logo{width:190px;margin-bottom:16px}
+  .bf-hero__title{font-size:2.2rem}
+  .bf-hero__lead{margin-top:10px;font-size:1.05rem}
+  .bf-onair,.bf-form{margin-top:14px}
+  .bf-onair__lamp{padding-top:10px;padding-bottom:10px}
+  .bf-input{height:50px}
+  .bf-btn{min-height:54px;padding-top:14px;padding-bottom:14px}
+  .bf-form__submit,.bf-form__micro{margin-top:10px}
+}
+
+/* ---------- comportamento muda: abaixo de 1100px a foto sobe pro topo ----------
+   Sem espaço pro texto e pro Geronimo lado a lado: a foto vira a "tela" da
+   transmissão em cima, com o visor por cima dela, e o texto + form descem. */
+@media (max-width:1099px){
+  .bf-hero{min-height:0}
+  /* a foto some antes da 2a linha do título: no tablet a mão do Geronimo cairia atrás do texto */
+  .bf-hero__bg{inset:0 0 auto 0;height:min(118vw,520px);background-position:76% 0;-webkit-mask-image:linear-gradient(to top,transparent 0%,transparent 10%,#000 55%);mask-image:linear-gradient(to top,transparent 0%,transparent 10%,#000 55%)}
+  .bf-hero__bg::after{background:linear-gradient(0deg,var(--bf-black) 0%,rgba(0,1,0,0) 40%)}
+  .bf-hero__inner{padding-top:min(64vw,340px)}
+  .bf-hero__copy{max-width:640px}
+  /* logo vira a "marca do canal" no canto do visor */
+  .bf-hero__logo{position:absolute;z-index:3;top:clamp(28px,4vw,40px);left:calc(var(--bf-gutter) + 10px);width:min(44vw,220px);margin:0}
+  .bf-vf{top:14px;left:max(12px,calc(var(--bf-gutter) - 8px));right:max(12px,calc(var(--bf-gutter) - 8px));height:calc(min(64vw,340px) - 30px)}
+  .bf-vf__rec{left:auto;right:clamp(14px,2vw,22px);top:clamp(16px,2.4vw,26px)}
+  .bf-vf__meter{display:none}
+}
+
+/* ---------- comportamento muda: mobile ---------- */
+@media (max-width:620px){
+  .bf-form__grid{grid-template-columns:1fr}
+  .bf-onair{width:100%}
+  .bf-onair__lamp{border-radius:13px 13px 0 0;width:100%;justify-content:center}
+  .bf-onair__when{width:100%;padding:10px 16px;text-align:center}
+  .bf-btn{padding:16px 22px;font-size:.98rem;text-align:center}
+  .bf-sticky{left:12px;right:12px;bottom:12px}
+  .bf-sticky .bf-btn{width:100%}
+  .bf-footer{padding-bottom:96px}
+}
+@media (max-width:359px){.bf-vf__tc{display:none}}
