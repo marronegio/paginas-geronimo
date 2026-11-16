@@ -203,7 +203,7 @@ a.bv-today__prize:hover{color:var(--bv-paper)}
   .bv-temple__bg img{-webkit-mask-image:linear-gradient(transparent,#000 13%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 13%,#000 86%,transparent)}
   .bv-plaque{gap:.45cqi;padding:.5cqi .6cqi}
   .bv-plaque__name{font-size:1.3cqi}
-  .bv-plaque__txt{font-size:.9cqi;line-height:1.28}
+  .bv-plaque__txt{font-size:.9cqi;line-height:1.32}
   .bv-plaque:nth-child(1){--x:15.41%;--w:10.92%;--y:22.63%;--h:17.67%;--d:0}
   .bv-plaque:nth-child(2){--x:27.98%;--w:10.8%;--y:22.63%;--h:17.67%;--d:1}
   .bv-plaque:nth-child(3){--x:40.44%;--w:10.27%;--y:22.63%;--h:17.67%;--d:2}
