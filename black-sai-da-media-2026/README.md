@@ -151,6 +151,12 @@ Se a página estiver aberta na virada do dia, troca sozinha. **Pra revisar um di
   Com a lista vazia, responde neutro ("não consegui confirmar"), nunca "não é do meu time".
 - **CTA fixo**: aparece depois do botão do topo; some enquanto as etiquetas ou a chamada final estão na tela.
 - As 6 áreas usam as colunas como imagem de fundo (`assets/areas-colunas.webp` a partir de 1024px, `assets/areas-colunas-mobile.webp` abaixo, 2 colunas x 3 fileiras); o texto de cada área fica dentro do quadrado preto da coluna. Se a imagem mudar, remedir os quadrados e atualizar as coordenadas `--x/--y/--w/--h` no `styles.css`.
+- **Retícula de pontos** (popup, sóis amarelos e fundos `.bv-dots`): usa `assets/textura-pontos-escura.webp`, que é
+  a `textura-pontos.webp` já "assada" em pontos pretos com transparência (alfa = 255 − cinza). Pintada normal ela dá
+  o mesmo resultado do antigo `multiply`; com `filter: invert(1)` vira pontos claros (o antigo `screen`).
+  **Não use `mix-blend-mode` / `background-blend-mode` aqui**: em celulares (Android e iOS) o blend falha dentro
+  do popup com rolagem e a textura aparece como um cinza claro com pontos pretos. A página também declara
+  `color-scheme: dark` para o "tema escuro automático" do Chrome no Android não recolorir nada.
 - Animações respeitam `prefers-reduced-motion`. A classe `.bv-js` (estados de espera) sai sozinha em 3s se o `app.js` não carregar.
 
 ### ⚠️ Antes de subir a página de vendas

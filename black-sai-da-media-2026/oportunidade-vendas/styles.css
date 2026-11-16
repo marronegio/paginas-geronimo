@@ -15,6 +15,7 @@
 @font-face{font-family:'Twemoji Country Flags';unicode-range:U+1F1E6-1F1FF,U+1F3F4,U+E0062-E0063,U+E0065,U+E0067,U+E006C,U+E006E,U+E0073-E0074,U+E0077,U+E007F;src:url('assets/TwemojiCountryFlags.woff2') format('woff2');font-display:swap}
 
 :root{
+  color-scheme:dark; /* página já é escura: evita o "tema escuro automático" do Chrome/Android recolorir */
   /* paleta do manual: preto #000100 + amarelo #FEC108; o resto são tons de apoio */
   --bv-black:#000100;
   --bv-ink:#0E0E0C;
@@ -166,9 +167,12 @@ a.bv-today__prize:hover{color:var(--bv-paper)}
 
 /* ---------- seções: base ---------- */
 .bv-sec{position:relative;padding:clamp(72px,10vw,132px) 0}
-/* retícula do manual: pontos claros (screen) nos fundos escuros, escuros (multiply) no amarelo */
-.bv-dots::before{content:"";position:absolute;inset:0;z-index:-1;background:url('assets/textura-pontos.webp') center/cover no-repeat;filter:invert(1);mix-blend-mode:screen;opacity:.12;pointer-events:none}
-.bv-dots--y::before{filter:none;mix-blend-mode:multiply;opacity:.38}
+/* retícula do manual: pontos claros nos fundos escuros, escuros no amarelo.
+   textura-pontos-escura.webp = pontos pretos com transparência (alfa = 1 - retícula):
+   pintada normal dá o mesmo resultado do multiply, e com invert(1) o mesmo do screen.
+   Não use blend mode aqui: falha em celulares (Android/iOS) e a textura aparece cinza. */
+.bv-dots::before{content:"";position:absolute;inset:0;z-index:-1;background:url('assets/textura-pontos-escura.webp') center/cover no-repeat;filter:invert(1);opacity:.12;pointer-events:none}
+.bv-dots--y::before{filter:none;opacity:.38}
 
 
 /* ---------- 2. as 6 áreas — colunas sobre a imagem de fundo ----------
@@ -222,7 +226,7 @@ a.bv-today__prize:hover{color:var(--bv-paper)}
 /* a foto acompanha a leitura no desktop */
 .bv-manifesto__fig{position:sticky;top:32px;isolation:isolate}
 .bv-manifesto__photo{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:22px}
-.bv-manifesto__sun{position:absolute;z-index:-1;right:-9%;bottom:-7%;width:46%;aspect-ratio:1;border-radius:50%;background:url('assets/textura-pontos.webp') center/260% no-repeat,var(--bv-yellow);background-blend-mode:multiply}
+.bv-manifesto__sun{position:absolute;z-index:-1;right:-9%;bottom:-7%;width:46%;aspect-ratio:1;border-radius:50%;background:url('assets/textura-pontos-escura.webp') center/260% no-repeat,var(--bv-yellow)}
 .bv-manifesto__tri{position:absolute;z-index:1;left:-8%;top:-7%;width:24%;height:auto;color:var(--bv-paper)}
 .bv-manifesto__title{font-size:clamp(2.3rem,1.5rem + 3.4vw,4.2rem)}
 .bv-prose{margin-top:clamp(22px,2.6vw,30px);display:grid;gap:18px;max-width:640px;color:var(--bv-soft);font-size:clamp(1.05rem,1rem + .3vw,1.2rem)}
@@ -365,7 +369,7 @@ a.bv-today__prize:hover{color:var(--bv-paper)}
 .bv-bonus__ring{position:absolute;z-index:-1;width:34%;aspect-ratio:1;border-radius:50%;border:clamp(8px,1vw,12px) solid var(--bv-yellow);left:-12%;top:-8%}
 /* sol do manual (amarelo + retícula) atrás do recorte: a cabeça passa por cima da borda dele.
    O sol termina antes de a foto começar a dissolver, pra o moletom sumir no fundo da seção e não no amarelo. */
-.bv-bonus__sun{position:absolute;z-index:-1;left:8%;top:10%;width:66%;aspect-ratio:1;border-radius:50%;background:url('assets/textura-pontos.webp') center/260% no-repeat,var(--bv-yellow);background-blend-mode:multiply}
+.bv-bonus__sun{position:absolute;z-index:-1;left:8%;top:10%;width:66%;aspect-ratio:1;border-radius:50%;background:url('assets/textura-pontos-escura.webp') center/260% no-repeat,var(--bv-yellow)}
 .bv-bonus__photo{position:relative;width:100%;-webkit-mask-image:linear-gradient(#000 74%,transparent 98%);mask-image:linear-gradient(#000 74%,transparent 98%)}
 
 /* ---------- 10. uma decisão ---------- */
@@ -505,7 +509,7 @@ a.bv-today__prize:hover{color:var(--bv-paper)}
 /* ---------- popup pré-checkout ---------- */
 .bv-modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;background:rgba(0,1,0,.8);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);animation:bv-modal-bg .25s ease both}
 .bv-modal__box{position:relative;isolation:isolate;width:min(100%,580px);max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain;padding:clamp(28px,4vw,40px) clamp(20px,4vw,40px) clamp(22px,3vw,30px);border-radius:24px;border:1px solid rgba(254,193,8,.32);background:linear-gradient(165deg,#040403 0%,#080705 50%,#5A4406 100%);box-shadow:0 30px 80px -20px rgba(0,0,0,.85);text-align:center;animation:bv-modal-in .3s cubic-bezier(.2,.7,.2,1) both}
-.bv-modal__box::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:url('assets/textura-pontos.webp') center/cover no-repeat;mix-blend-mode:multiply;opacity:.55;pointer-events:none}
+.bv-modal__box::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:url('assets/textura-pontos-escura.webp') center/cover no-repeat;opacity:.55;pointer-events:none}
 .bv-modal__close{position:absolute;top:12px;right:12px;width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(0,1,0,.55);color:var(--bv-paper);font:400 1.5rem/1 var(--bv-body);cursor:pointer;transition:background-color .15s ease}
 .bv-modal__close:hover{background:var(--bv-black)}
 .bv-modal__logo{width:min(60%,240px);height:auto;margin:0 auto}
