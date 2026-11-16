@@ -112,12 +112,15 @@ O contador do topo, a faixa de bônus e os bilhetes dos sorteios seguem `PHASES`
 
 | Quando | O que aparece |
 |---|---|
-| até 16/11 23h59 (inclui a revisão antes da live) | contador até 23h59 de hoje + faixa "1 processo de coaching, 1 iPad, 3 kits… ↓" + os 2 bilhetes ("Só até amanhã, 23h59") |
+| primeira hora de vendas (enquanto `PRIMEIRA_HORA = true`; inclui a revisão antes da live) | contador até 23h59 de hoje + faixa "na primeira hora de vendas… coaching, 1 iPad, 3 kits e AirPods ↓" + os 3 bilhetes: 4 sorteios (sozinho em cima), 16/11 (iPad + kits) e AirPods ("Só até amanhã, 23h59") |
+| resto do 16/11, até 23h59 | contador + faixa "até 23h59 de hoje… 1 iPad, 3 kits de livros autografados e AirPods ↓" + bilhete de 16/11 e bilhete das AirPods |
 | 17/11 | contador + faixa "você ainda concorre a 1 par de AirPods" + só o bilhete das AirPods ("Só até hoje, 23h59") |
 | a partir de 18/11 | tudo isso some (o HTML já nasce `hidden`; sem JS também não aparece) |
 
-Se a página estiver aberta na virada do dia, troca sozinha. **Pra revisar um dia específico:**
-`?preview_dia=16`, `?preview_dia=17` ou `?preview_dia=off` (esse parâmetro não é guardado nem repassado ao checkout).
+**A primeira hora não tem horário fixo** (depende do pitch): quando acabar, troque `PRIMEIRA_HORA` para `false`
+no `app.js` e incremente o `?v=`. Se ninguém desligar, ela acaba sozinha às 23h59 de 16/11.
+Se a página estiver aberta na virada do dia, troca sozinha. **Pra revisar uma fase específica:**
+`?preview_dia=h1`, `?preview_dia=16`, `?preview_dia=17` ou `?preview_dia=off` (esse parâmetro não é guardado nem repassado ao checkout).
 
 ### O que é de cada seção
 

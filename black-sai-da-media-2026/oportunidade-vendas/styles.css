@@ -313,6 +313,8 @@ a.bv-today__prize:hover{color:var(--bv-paper)}
    na imagem o canhoto (do centro do furo até a borda direita) mede 249px = var(--stub).
    O picote foi tirado da imagem (esticaria junto) e é redesenhado no .bv-ticket__stub::before. */
 .bv-ticket{--stub:clamp(104px,11vw,140px);position:relative;isolation:isolate;flex:1 1 440px;max-width:620px;display:grid;grid-template-columns:minmax(0,1fr) var(--stub);color:var(--bv-paper)}
+/* bilhete da primeira hora: sozinho na primeira linha (as margens completam a linha), os outros dois lado a lado embaixo */
+.bv-ticket--lead{flex:0 0 min(100%,620px);margin-inline:max(0px,(100% - 620px) / 2)}
 .bv-ticket::before{content:"";position:absolute;inset:0;z-index:-1;border-style:solid;border-color:transparent;border-width:calc(var(--stub) * 74 / 249) calc(var(--stub) * 286 / 249) calc(var(--stub) * 71 / 249) calc(var(--stub) * 83 / 249);border-image:url('assets/bilhete.webp') 74 286 71 83 fill stretch}
 .bv-ticket__main{padding:clamp(22px,2.6vw,32px) clamp(20px,2.6vw,32px)}
 .bv-ticket__kicker{font:400 clamp(1.45rem,1.15rem + 1.2vw,2rem)/1.08 var(--bv-display);text-transform:uppercase;color:var(--bv-yellow);text-wrap:balance}

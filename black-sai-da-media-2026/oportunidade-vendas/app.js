@@ -32,8 +32,16 @@
 
   // Sorteios do dia (contador do topo, faixa de bonus e bilhetes). Horario de Brasilia, -03:00 fixo.
   // Antes de 16/11 a pagina mostra o dia 16 (pra revisao). Depois de 17/11 23h59, tudo isso some.
-  // Pra revisar um dia especifico: ?preview_dia=16 | 17 | off  (esse parametro nao vai pro checkout).
+  // Pra revisar um dia especifico: ?preview_dia=h1 | 16 | 17 | off  (esse parametro nao vai pro checkout).
+  //   h1 = primeira hora de vendas (bilhete dos 4 sorteios + bilhete de 16/11 + bilhete das AirPods)
+  //   16 = resto do dia 16 (bilhete de 16/11 + bilhete das AirPods)
+  //   17 = so o bilhete das AirPods
+  // Primeira hora de vendas: nao tem horario fixo (depende do pitch). Fica no ar enquanto isto for true.
+  // Acabou a primeira hora? Troque pra false (e incremente o ?v= do app.js no index.html).
+  // Se ninguem desligar, ela acaba sozinha as 23h59 de 16/11, junto com o dia 16.
+  var PRIMEIRA_HORA = true;
   var PHASES = [
+    { id: 'h1', key: 'h1', end: '2026-11-16T23:59:59-03:00' },
     { id: 'd1', key: '16', end: '2026-11-16T23:59:59-03:00' },
     { id: 'd2', key: '17', end: '2026-11-17T23:59:59-03:00' }
   ];
@@ -125,7 +133,7 @@
     }
   }
 
-  // ----- fases dos sorteios (16/11, 17/11, depois) -----
+  // ----- fases dos sorteios (primeira hora, 16/11, 17/11, depois) -----
   function currentPhase() {
     var forced = new URLSearchParams(window.location.search).get('preview_dia');
     if (forced) {
@@ -134,6 +142,7 @@
     }
     var now = Date.now();
     for (var i = 0; i < PHASES.length; i++) {
+      if (PHASES[i].id === 'h1' && !PRIMEIRA_HORA) continue;
       if (now <= new Date(PHASES[i].end).getTime()) return PHASES[i];
     }
     return null;
