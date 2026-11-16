@@ -38,9 +38,17 @@
     { id: 'd2', key: '17', end: '2026-11-17T23:59:59-03:00' }
   ];
 
-  // TODO(acao): numeros oficiais do time (WhatsApp), com DDD, um por item. Ex.: '21 99999-9999'.
+  // Numeros oficiais do time (WhatsApp), com DDD, um por item. O verificador compara DDD + 8 ultimos
+  // digitos, entao tanto faz ter ou nao o 9 da frente / o +55.
   // Lista vazia = o verificador responde neutro ("nao consegui confirmar"), nunca "nao e do meu time".
-  var TEAM_NUMBERS = [];
+  var TEAM_NUMBERS = [
+    '4391224134', '4391599898', '4391023675', '4391231264', '1151940411',
+    '11997354745', '11950296377', '4391888979', '4331960267', '4331960142',
+    '4331960636', '4331960637', '4331960271', '11958771837', '51974016829',
+    '11978559858', '16993139975', '54991757042', '4331960964', '11948476785',
+    '11971767704', '51991364869', '19992940796', '16991137322', '65993280252',
+    '54999426878', '54981189098', '11914066180'
+  ];
 
   var COUNTRIES = [
     { code: 'BR', dial: '+55', flag: '🇧🇷' }, { code: 'US', dial: '+1', flag: '🇺🇸' }, { code: 'CA', dial: '+1', flag: '🇨🇦' },

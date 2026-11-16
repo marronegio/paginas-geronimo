@@ -158,7 +158,6 @@ Se a página estiver aberta na virada do dia, troca sozinha. **Pra revisar um di
 | Onde | O quê |
 |---|---|
 | `app.js` → `DESTINO` | confirmar checkout ou WhatsApp |
-| `app.js` → `TEAM_NUMBERS` | números oficiais do time, pro verificador |
 | `index.html` → FAQ "Por onde chega o meu acesso?" | e-mail do suporte (hoje `[E-MAIL DO SUPORTE]`, `mailto:SUBSTITUIR-EMAIL-SUPORTE`) |
 | `index.html` → FAQ "Os treinamentos que você lançar depois…" | resposta a confirmar com a Gi (a copy marcou) |
 | `index.html` → bio | a copy pede "Geronimo sorridente"; hoje é a mesma foto da captação. Números da bio (4.000.000 / 63.000.000 / 5.719.000) vieram entre colchetes na copy: confirmar |
@@ -171,7 +170,7 @@ Barra de 90% → a "nota" de quem comprou (H1 impresso no papel + carimbo "Pra s
 (e-mail, pesquisa em destaque — é o que falta pros 100% —, agenda) → "Ainda com dúvidas?".
 GTM + `noindex`, sem pixel da VK (mesmo padrão do obrigado da CNC).
 
-- **Pendente:** link do Typeform no botão `#survey-btn` (hoje `https://SUBSTITUIR-LINK-TYPEFORM`).
+- Pesquisa: botão `#survey-btn` → `https://igtcoaching.typeform.com/to/sE0RKEta`.
   Os parâmetros da URL do obrigado são repassados pro link.
 - "Salvar no Google Agenda" cria o evento de 08/12, das 19h às 21h (Brasília). A copy não diz a duração:
   ajuste o fim no link se precisar.
