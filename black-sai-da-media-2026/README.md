@@ -1,11 +1,13 @@
-# Black Fora da Média 2026 — LPs de captação + obrigado
+# Black Fora da Média 2026 — LPs de captação, página de vendas + obrigados
 
 Live de Black Friday do Geronimo Theml: **segunda-feira, 16/11/2026, às 20h, no YouTube**.
 Páginas de captação gratuita (nome + e-mail + WhatsApp) → página de obrigado → Grupo VIP do WhatsApp.
+Na live abre a **página de vendas** (acesso vitalício, no ar até 22/11) → popup pré-checkout → Hotmart → obrigado da venda.
 
 Segue o padrão de [`../protocolo-6-porcento-out26/README.md`](../protocolo-6-porcento-out26/README.md):
 HTML/CSS/JS vanilla, sem build, CSS inline no `<head>`, fontes self-hosted, GTM + pixels VK.
-Prefixo de classe: **`bf-`** nas LPs, **`bft-`** no obrigado.
+Prefixo de classe: **`bf-`** nas LPs de captação, **`bft-`** no obrigado delas,
+**`bv-`** na página de vendas, **`bvt-`** no obrigado da venda.
 
 ---
 
@@ -18,7 +20,9 @@ black-sai-da-media-2026/
 ├── oportunidade-traf-v2/    # tráfego — ALTERNATIVA C ("No dia 16/11, eu vou te mostrar a condição de BLACK…")
 ├── oportunidade-ao-vivo-v1/ # DURANTE a live — Opção A, direta ("Eu tô ao vivo agora…") → form → YouTube
 ├── oportunidade-ao-vivo-v2/ # DURANTE a live — Opção B, na ferida ("O seu 'eu' de 18 anos…") → form → YouTube
-└── obrigado/                # página de obrigado ÚNICA, usada pelas 3 LPs de captação
+├── obrigado/                # página de obrigado ÚNICA, usada pelas 3 LPs de captação
+├── oportunidade-vendas/     # PÁGINA DE VENDAS — acesso vitalício (ver "Página de vendas" abaixo)
+└── oportunidade-vendas-obrigado/  # obrigado da COMPRA (a Hotmart redireciona pra cá)
 ```
 
 Cada LP é autocontida (`index.html`, `styles.css`, `app.js`, `.htaccess`, `assets/`).
@@ -47,6 +51,7 @@ e o `app.js` manda esse valor no payload dos dois webhooks (ao lado do `pagina`,
 | oportunidade-traf-v2 | `black26-traf-v2` |
 | oportunidade-ao-vivo-v1 | `black26-ao-vivo-v1` |
 | oportunidade-ao-vivo-v2 | `black26-ao-vivo-v2` |
+| oportunidade-vendas | `black26-vendas` |
 
 ---
 
@@ -74,7 +79,106 @@ Anúncio / mensagem → LP ao vivo
 
 ---
 
-## ⚠️ Antes de subir: o que falta preencher
+## Página de vendas (`oportunidade-vendas`)
+
+Acesso vitalício a todos os treinamentos. Condição no ar **até 22/11**. Duas condições de preço:
+**não aluno** 12x R$ 199,61 / R$ 2.000 e **aluno** 12x R$ 149,71 / R$ 1.500.
+
+```
+Live / anúncio / mensagem (com UTMs) → LP de vendas
+   todo CTA de compra abre o POPUP PRÉ-CHECKOUT
+   popup: escolha da condição (aluno / não aluno) + nome + e-mail + WhatsApp com DDI
+          (os botões das etiquetas de preço já abrem com a condição marcada)
+   ├── POST webhook n8n IGT (d2fb4990…) + CRM Clint (f6f4e8b2…)   (payload da casa + oferta + status + destino)
+   └── DESTINO = 'checkout' → Hotmart (link da condição escolhida, com UTMs + xcod da VK +
+                              name/email/phoneac/phonenumber: o checkout abre pré-preenchido)
+       DESTINO = 'whatsapp' → WhatsApp do comercial (WHATSAPP_URL, com UTMs, sem xcod)
+                                  └── Hotmart → ../oportunidade-vendas-obrigado/
+```
+
+### Checkout ou WhatsApp?
+
+Uma chave só, no topo do `app.js`: **`DESTINO = 'checkout'`** (padrão) ou **`'whatsapp'`**.
+Ela muda o redirect, o texto do botão do popup ("Ir para o pagamento" / "Falar com o meu time") e a
+microcopy embaixo dele (as duas versões estão no HTML com `.bv-only-checkout` / `.bv-only-whatsapp`).
+O payload dos webhooks leva `destino`, `oferta` (`nao-aluno` | `aluno`) e `status` (`não aluno` | `aluno`, pro CRM) além dos campos de sempre.
+Webhooks próprios do pré-checkout: n8n `d2fb4990-1ca1-4241-bb56-850eeed4762b` e Clint `f6f4e8b2-7db0-427b-81ba-ba455c310c71`.
+**Mexeu no `app.js`? Incremente o `?v=` no `index.html`.**
+
+### Sorteios do dia (16 e 17/11)
+
+O contador do topo, a faixa de bônus e os bilhetes dos sorteios seguem `PHASES` no `app.js`
+(horário de Brasília, `-03:00`):
+
+| Quando | O que aparece |
+|---|---|
+| até 16/11 23h59 (inclui a revisão antes da live) | contador até 23h59 de hoje + faixa "1 processo de coaching, 1 iPad, 3 kits… ↓" + os 2 bilhetes ("Só até amanhã, 23h59") |
+| 17/11 | contador + faixa "você ainda concorre a 1 par de AirPods" + só o bilhete das AirPods ("Só até hoje, 23h59") |
+| a partir de 18/11 | tudo isso some (o HTML já nasce `hidden`; sem JS também não aparece) |
+
+Se a página estiver aberta na virada do dia, troca sozinha. **Pra revisar um dia específico:**
+`?preview_dia=16`, `?preview_dia=17` ou `?preview_dia=off` (esse parâmetro não é guardado nem repassado ao checkout).
+
+### O que é de cada seção
+
+- **Etiquetas de preço** (seção 8): caem do fio e balançam até parar quando entram na tela; o
+  "INDECENTE!" bate como carimbo. Disparo único via `[data-inview]` → `.is-in`. Cada etiqueta é uma
+  imagem (`assets/etiqueta-amarela.webp` / `etiqueta-clara.webp`, com barbante, furo e picote); o texto
+  fica entre o furo e o picote e o botão abaixo do picote, em posições % da imagem (`.bv-tag__info` / `.bv-tag__stub`).
+- **Topo** (vendas): no desktop (a partir de 1100px) a foto ocupa a largura toda, a headline fica em 3 linhas
+  (amarelo / branco / amarelo) e o relógio dos sorteios flutua sobre o peito do Geronimo, posicionado em `cqw`
+  (% da largura da foto: `.bv-today` no bloco `min-width:1100px`). Abaixo de 1100px a foto sobe pro topo e o
+  relógio volta pro fluxo, abaixo do card "Quanto você paga?". O ∞ do selo "Acesso vitalício" tem um trecho aceso
+  que percorre o laço (parado para quem desativa animações).
+- **Arsenal** (seção 4): um card por treinamento, com a capa em destaque (vitrine de 5 colunas a partir de 1240px;
+  capa à esquerda e texto à direita abaixo disso). O brilho colorido atrás de cada capa é a própria capa desfocada
+  (`.bv-item__glow`, mesmo arquivo): ao trocar uma capa, troque o `src` das duas `<img>` do item.
+- **Bilhetes dos sorteios** (seção 7): a moldura é `assets/bilhete.webp` fatiada em 9 partes (`border-image` no
+  `.bv-ticket::before`), então cantos, ornamentos e furos não deformam com a altura do texto. O picote dourado
+  foi tirado da imagem e é desenhado no `.bv-ticket__stub::before` (esticado, ele ficaria com traços longos).
+  Fundo: palco com os prêmios no chão (`assets/sorteios-palco.webp` acima de 900px, `sorteios-palco-mobile.webp`
+  abaixo), preso no pé da seção na largura toda. No desktop a seção tem no mínimo a altura da imagem e os bilhetes,
+  na largura normal, ficam centralizados por cima do palco (podem cobrir um pouco os livros e o iPad, aprovado).
+  No mobile o `padding-bottom: 52vw` reserva o chão pros prêmios aparecerem abaixo dos bilhetes.
+- **Uma decisão** (seção 10): tudo centralizado. As 4 frases "espera…" formam uma escada no centro e, ao entrar
+  na tela (`[data-inview]` → `.is-in`), caem uma por vez a cada 0,5s: a que cai acende e a anterior apaga pro
+  cinza; "espera o próximo ano" fica acesa. No mobile viram uma coluna centrada.
+- **Notinhas da conta** (seções 5 e 6): papel picotado com `mask`; o total conta de 0 até o valor (`data-count`).
+- **Depoimentos**: o "trecho circulado" da copy é desenhado por cima de cada print. As coordenadas ficam
+  no HTML, em `data-marks="x y largura altura [forma]; …"` (px da imagem original; forma 2 = elipse,
+  4 = quase retângulo). **Trocou um print? Remeça os trechos.**
+- **Verificador de número** (seção 17): compara DDD + 8 últimos dígitos com `TEAM_NUMBERS` no `app.js`.
+  Com a lista vazia, responde neutro ("não consegui confirmar"), nunca "não é do meu time".
+- **CTA fixo**: aparece depois do botão do topo; some enquanto as etiquetas ou a chamada final estão na tela.
+- As 6 áreas usam as colunas como imagem de fundo (`assets/areas-colunas.webp` a partir de 1024px, `assets/areas-colunas-mobile.webp` abaixo, 2 colunas x 3 fileiras); o texto de cada área fica dentro do quadrado preto da coluna. Se a imagem mudar, remedir os quadrados e atualizar as coordenadas `--x/--y/--w/--h` no `styles.css`.
+- Animações respeitam `prefers-reduced-motion`. A classe `.bv-js` (estados de espera) sai sozinha em 3s se o `app.js` não carregar.
+
+### ⚠️ Antes de subir a página de vendas
+
+| Onde | O quê |
+|---|---|
+| `app.js` → `DESTINO` | confirmar checkout ou WhatsApp |
+| `app.js` → `TEAM_NUMBERS` | números oficiais do time, pro verificador |
+| `index.html` → FAQ "Por onde chega o meu acesso?" | e-mail do suporte (hoje `[E-MAIL DO SUPORTE]`, `mailto:SUBSTITUIR-EMAIL-SUPORTE`) |
+| `index.html` → FAQ "Os treinamentos que você lançar depois…" | resposta a confirmar com a Gi (a copy marcou) |
+| `index.html` → bio | a copy pede "Geronimo sorridente"; hoje é a mesma foto da captação. Números da bio (4.000.000 / 63.000.000 / 5.719.000) vieram entre colchetes na copy: confirmar |
+| `assets/cursos/` | capas **provisórias** de `mentoria-no-comando`, `ias-da-cnc` e `protocolo-6` (geradas a partir das fotos de hero da CNC e do P6). Trocar pelas oficiais, mesmo nome, 400×654 |
+| Hotmart | URL de obrigado apontando pra `/oportunidade-vendas-obrigado/` |
+
+## Obrigado da venda (`oportunidade-vendas-obrigado`)
+
+Barra de 90% → a "nota" de quem comprou (H1 impresso no papel + carimbo "Pra sempre") → 3 passos
+(e-mail, pesquisa em destaque — é o que falta pros 100% —, agenda) → "Ainda com dúvidas?".
+GTM + `noindex`, sem pixel da VK (mesmo padrão do obrigado da CNC).
+
+- **Pendente:** link do Typeform no botão `#survey-btn` (hoje `https://SUBSTITUIR-LINK-TYPEFORM`).
+  Os parâmetros da URL do obrigado são repassados pro link.
+- "Salvar no Google Agenda" cria o evento de 08/12, das 19h às 21h (Brasília). A copy não diz a duração:
+  ajuste o fim no link se precisar.
+
+---
+
+## ⚠️ Antes de subir: o que falta preencher (LPs de captação)
 
 Nada pendente no código. Link do Grupo VIP: `https://links.geronimo.com.br/black-friday-fim-da-vida-na-media-grupos-wpp-nov26` (o obrigado redireciona sozinho em 5s).
 
