@@ -39,7 +39,7 @@
   // Primeira hora de vendas: nao tem horario fixo (depende do pitch). Fica no ar enquanto isto for true.
   // Acabou a primeira hora? Troque pra false (e incremente o ?v= do app.js no index.html).
   // Se ninguem desligar, ela acaba sozinha as 23h59 de 16/11, junto com o dia 16.
-  var PRIMEIRA_HORA = true;
+  var PRIMEIRA_HORA = false;
   var PHASES = [
     { id: 'h1', key: 'h1', end: '2026-11-16T23:59:59-03:00' },
     { id: 'd1', key: '16', end: '2026-11-16T23:59:59-03:00' },
